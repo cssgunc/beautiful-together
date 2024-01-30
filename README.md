@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# Beautiful-Together
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Getting Started
 
-## Available Scripts
+#### Installing node
+1. Check if you have node and npm install by running ```node -v``` and ```npm -v```. If both are installed, skip this section.
+2. Download node from https://nodejs.org/en/download. Follow the steps as shown.
+3. Ensure that you have everything downloaded by repeating Step 1
 
-In the project directory, you can run:
+#### Starting with React
+1. [Clone the repository](https://github.com/git-guides/git-clone) into a local workspace
+2. Open the repo in an IDE of your choice.
+3. Open a new terminal for the project
+4. Run ```npm install```. You will get many warnings and vulnerabilities. Ignore these. If you get errors, you will have to debug.
+5. Run ```npm start```. This will be the command you need to run to start the project most of the time.
 
-### `npm start`
+#### Updating Dependencies and Running the Project
+1. Update dependencies after pulling from the remote repository by running ```npm install```
+2. Run ```npm start```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Branching
+All commands must be run inside your project terminal. For all your tasks, you will need to create a branch for your team and submit a pull request once you are done.
 
-### `npm test`
+#### Creating New Branch
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Option 1: Creating a branch on GitHub**
+1. Click the branch button on the github page of our repo. It should be right underneath the repo name and say "master"
+2. Type in the name of the branch you want to create.
+3. Click **Create Branch: [branch name]**
+4. Open up your project
+5. Run ```git pull``` in the terminal to update your branches
+6. Run ```git checkout [branch name]``` or ```git switch [branch name]``` to switch to the newly created branch
+7. Double check that you are in the correct repository by running ```git branch -a```
+8. Make your changes and push as normal while working within your branch
+   
+**Option 2: Creating a branch locally**
+1. ```git branch [name]``` to create a branch with name of [name].
+2. ```git checkout [name]``` to switch to branch [name].
+3. When you've finished making your changes locally, run ```git push -u origin [name]``` to create the remote branch and push to there.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Submit a Pull Request
+1. Navigate to the [repository page](https://github.com/cssgunc/catch).
+2. Click the **master** branch button and navigate to the branch you worked on.
+3. Click the **Contribute** button
+4. Click **Open Pull Request**
+5. Click write a description of your changes
+6. Click **Create pull request** 
