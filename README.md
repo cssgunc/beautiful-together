@@ -33,6 +33,7 @@ All commands must be run inside your project terminal. For all your tasks, you w
 6. Run ```git checkout [branch name]``` or ```git switch [branch name]``` to switch to the newly created branch
 7. Double check that you are in the correct repository by running ```git branch -a```
 8. Make your changes and push as normal while working within your branch
+   
 **Option 2: Creating a branch locally**
 1. ```git branch [name]``` to create a branch with name of [name].
 2. ```git checkout [name]``` to switch to branch [name].
