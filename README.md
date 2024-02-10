@@ -55,3 +55,6 @@ All commands must be run inside your project terminal. For all your tasks, you w
 
 #### Resources:
 - [Firestore Documentation](https://firebase.google.com/docs/firestore) (our work falls under "Web modular API")
+- [TailwindCSS Tutorial](https://www.youtube.com/watch?v=mr15Xzb1Ook)
+- [Firebase Tutorial](https://www.youtube.com/watch?v=vAoB4VbhRzM)
+- [ReactJS Tutorial](https://www.youtube.com/watch?v=Tn6-PIqc4UM)
