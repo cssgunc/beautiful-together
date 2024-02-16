@@ -1,4 +1,4 @@
-import { db } from '../firebase-config.js';
+import { db } from './firebase-config.js';
 import { collection, addDoc } from 'firebase/firestore';
 
 
@@ -24,7 +24,7 @@ async function addMailDocument(first_name, last_name, address, country, city, st
                 <li><strong>Email:</strong> ${email}</li>
             </ul><p>Thank you for your attention.</p></>,
       },
-      to: [], //bt email
+      to: ['example@gmail.com'], //put test email here
     };
  
     try {
