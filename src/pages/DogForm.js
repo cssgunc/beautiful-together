@@ -132,9 +132,9 @@ export const DogForm = () => {
                         <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" placeholder=" your_email@email.com" type="email" id="email" name="email" required />
                     </div>
 
-                    
-                    <button type="button" form="dogform" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-4 px-3 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Next</button>
-
+                    <div className="flex flex-row justify-end">
+                        <button type="button" form="dogform" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 text-center text-slate-500 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Next</button>
+                    </div>
                 </div>
 
                 <div id="part2" className={page === 1 ? "" : "hidden "}>
@@ -144,8 +144,10 @@ export const DogForm = () => {
                         <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="text" id="quest2" name="quest1" autoComplete="TODO " required />
                     </div>
 
-                    <button type="button" onClick={() => setPage(0)} className="flex flex-col pt-2 pb-4 px-3 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Previous</button>
-                    <button type="button" onClick={() => setPage(2)} className="flex flex-col pt-2 pb-4 px-3 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Next</button>
+                    <div className="flex flex-row justify-end">
+                        <button type="button" onClick={() => setPage(0)} className="flex flex-col pt-2 pb-2 px-2 text-center text-slate-500 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Previous</button>
+                        <button type="button" onClick={() => setPage(2)} className="flex flex-col pt-2 pb-2 px-2 text-center text-slate-500 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Next</button>
+                    </div>
                 </div>
 
                 <div id="part3" className={page === 2 ? "" : "hidden "}>
@@ -155,9 +157,12 @@ export const DogForm = () => {
                         <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="text" id="quest2" name="quest1" autoComplete="TODO " required />
                     </div>
 
-                    <button type="button" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-4 px-3 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Previous</button>
 
-                    <button className="flex flex-col pt-2 pb-4 px-3 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2" type="submit">Submit</button>
+                    <div className="flex flex-row justify-end">
+                        <button type="button" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 text-center text-slate-500 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Previous</button>
+
+                        <button className="flex flex-col pt-2 pb-2 px-2 text-center text-slate-500 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2" type="submit">Submit</button>
+                    </div>
                 </div>
             </form>
 
