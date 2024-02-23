@@ -98,7 +98,7 @@ export const DogForm = () => {
 
                     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="zip">*Zip/Postal Code:</label>
-                        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="number" id="zip" name="zip" required />
+                        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="text" id="zip" name="zip" required />
                     </div>
 
                     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
@@ -108,7 +108,7 @@ export const DogForm = () => {
 
                     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="cell">*Cell Phone:</label>
-                        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="yel" id="cell" name="cell" required />
+                        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="yel" id="cell" name="cell" pattern="\d{5}-?(\d{4})?" required />
                     </div>
 
                     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
