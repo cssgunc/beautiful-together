@@ -18,12 +18,12 @@ export const DogForm = () => {
 
                     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="address">*Address:</label>
-                        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="text" id="address" name="address" required />
+                        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="text" id="address" name="address" pattern="^(?=\S*\s)(?=\P{L}*\p{L})(?=\D*\d)[\p{L}\d\s',.#/-]*$" autoComplete="street-address" required />
                     </div>
 
                     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="county">*Country:</label>
-                        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="text" id="country" name="country" required />
+                        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="text" id="country" name="country" autoComplete="country-name" required />
                     </div>
 
                     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
@@ -98,7 +98,7 @@ export const DogForm = () => {
 
                     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="zip">*Zip/Postal Code:</label>
-                        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="text" id="zip" name="zip" required />
+                        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="text" id="zip" name="zip" autoComplete="postal-code" pattern="\d{5}-?(\d{4})?" required />
                     </div>
 
                     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
@@ -108,7 +108,7 @@ export const DogForm = () => {
 
                     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="cell">*Cell Phone:</label>
-                        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="yel" id="cell" name="cell" pattern="\d{5}-?(\d{4})?" required />
+                        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="yel" id="cell" name="cell" required />
                     </div>
 
                     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
