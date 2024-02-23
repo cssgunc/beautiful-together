@@ -1,11 +1,27 @@
+"use client";
+import { useState } from "react";
+
 export const DogForm = () => {
+
+    // TODO":
+    
+    // create react component for reusable form question??
+
+    // fix page-switching, so all previous form questions are answered before next page
+    // OR
+    // split pages into individual forms, track previous answers somehow and submit them all on page 3??
+
+    // Create list of questions for the dogs
+
+    const [page, setPage] = useState(0);
+
     return (
         <main className="flex flex-col items-center bg-gray-200 w-full h-full">
 
             <h1 className="text-center text-6xl m-2 font-extralight h-11/12 w-11/12 p-5 text-orange-200 justify-center rounded-md border-orange-400 border-4 bg-slate-500">Dog Preference Form</h1>
 
-            <div className="flex p-8 justify-center m-3 bg-slate-500 w-10/12 rounded-lg border-4 border-orange-400">
-                <form>
+            <form className="flex p-8 justify-center m-3 bg-slate-500 w-10/12 rounded-lg border-4 border-orange-400">
+                <div id= "part1" className={page === 0 ? "" : "hidden "}>
                     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="first_name">*First Name:</label>
                         <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="text" id="f_name" name="first_name" required />
@@ -116,9 +132,34 @@ export const DogForm = () => {
                         <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="email" id="email" name="email" required />
                     </div>
 
+                    
+                    <button type="button" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-4 px-3 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Next</button>
+
+                </div>
+
+                <div id="part2" className={page === 1 ? "" : "hidden "}>
+
+                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
+                        <label className="font-extralight text-slate-400" for="zip">*Page 2 Question:</label>
+                        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="text" id="quest2" name="quest1" autoComplete="TODO " pattern="\d{5}-?(\d{4})?" required />
+                    </div>
+
+                    <button type="button" onClick={() => setPage(0)} className="flex flex-col pt-2 pb-4 px-3 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Previous</button>
+                    <button type="button" onClick={() => setPage(2)} className="flex flex-col pt-2 pb-4 px-3 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Next</button>
+                </div>
+
+                <div id="part3" className={page === 2 ? "" : "hidden "}>
+
+                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
+                        <label className="font-extralight text-slate-400" for="zip">*Page 2 Question:</label>
+                        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="text" id="quest2" name="quest1" autoComplete="TODO " pattern="\d{5}-?(\d{4})?" required />
+                    </div>
+
+                    <button type="button" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-4 px-3 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Previous</button>
+
                     <button className="flex flex-col pt-2 pb-4 px-3 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2" type="submit">Submit</button>
-                </form>
-            </div>
+                </div>
+            </form>
 
         </main>
     );
