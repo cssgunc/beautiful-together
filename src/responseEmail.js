@@ -1,9 +1,9 @@
 import { db } from './firebase-config.js';
-import { doc, getDoc, collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 
 
 async function addMailDocument(first_name, last_name, address, country, city, state, zip_code, home_phone, cell_phone, email) {
-    const mailCollection = collection(db, 'mail');
+    
  
     // Document data
     const mailData = {
@@ -27,16 +27,13 @@ async function addMailDocument(first_name, last_name, address, country, city, st
       to: ['example@gmail.com'], //put test email here
     };
  
-    console.log("test2");
+    
 
-    const docRef = collection(db, "dogs");
-    const docSnap = await getDoc(docRef);
-
-    console.log(docSnap.data());
 
 
     try {
-      const docRef = await addDoc(mailCollection, mailData);
+      console.log("test2");
+      const docRef = await addDoc(collection(db, "mail"), mailData);
       console.log('Document written with ID: ', docRef.id);
     } catch (e) {
       console.error('Error adding document: ', e);
