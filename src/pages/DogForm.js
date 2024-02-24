@@ -22,10 +22,12 @@ export const DogForm = () => {
 
             <form id="dogform" className="flex p-8 justify-center m-3 bg-slate-500 w-10/12 rounded-lg border-4 border-orange-400">
                 <div id= "part1" className={page === 0 ? "" : "hidden "}>
-                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
+                    {/* <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="first_name">*First Name:</label>
                         <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" placeholder=" first name" type="text" id="f_name" name="first_name" required />
-                    </div>
+                    </div> */}
+
+                    <InputQuestion label="*First Name:" id="f_name" name="first_name" placeholder=" first name" required/>
 
                     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="last_name">*Last Name:</label>
@@ -167,5 +169,14 @@ export const DogForm = () => {
             </form>
 
         </main>
+    );
+}
+
+function InputQuestion({label, name, id, ...args }) {
+    return(
+    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
+        <label className="font-extralight text-slate-400" for={name}>{label}</label>
+        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="text" id={id} name={name} {...args} />
+    </div>
     );
 }
