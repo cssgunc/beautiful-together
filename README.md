@@ -1,6 +1,36 @@
 # Beautiful-Together
 
-### Getting Started
+## Getting Started
+
+### Using the Dev Container
+
+#### Install Requirements
+
+1. Docker Desktop (https://www.docker.com/products/docker-desktop/)
+2. VSCode (https://code.visualstudio.com/download)
+3. Dev Container Extension for VS Code (Search `Dev Containers` in the Extension Marketplace)
+
+#### Clone the Repository
+
+4. [Clone the repository](https://github.com/git-guides/git-clone)
+5. Open it in VSCode
+
+#### Start the Dev Container
+
+6. Press `Ctrl/Command + Shift + P` to open the VSCode Command Prompt
+7. Type and run `Dev Containers: Reopen in Container`
+
+#### Install Node Packages
+
+8. Once the Dev Container builds and opens in VSCode, open a new terminal, and a `zsh` prompt should open
+9. Run `npm install` to install the required packages
+10. To ensure a clean install open the VSCode Command Prompt again and run `Developer: Reload Window` 
+
+
+
+### Traditional Install
+
+If you are having issues with the Dev Container, you can also install the dependencies directly onto your computer
 
 #### Installing node
 1. Check if you have node and npm install by running ```node -v``` and ```npm -v```. If both are installed, skip this section.
@@ -19,7 +49,7 @@
 2. Run ```npm start```
 
 
-### Branching
+## Branching
 All commands must be run inside your project terminal. For all your tasks, you will need to create a branch for your team and submit a pull request once you are done.
 
 #### Creating New Branch
@@ -47,7 +77,7 @@ All commands must be run inside your project terminal. For all your tasks, you w
 5. Click write a description of your changes
 6. Click **Create pull request** 
 
-### Working with the Backend
+## Working with the Backend
 
 #### Getting Started
 1. You will need to set up your **.env** file. It should be placed in your root directory of your project. More details on that will be sent out through email.
