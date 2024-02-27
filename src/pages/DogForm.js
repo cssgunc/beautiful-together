@@ -27,27 +27,35 @@ export const DogForm = () => {
                         <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" placeholder=" first name" type="text" id="f_name" name="first_name" required />
                     </div> */}
 
-                    <InputQuestion label="*First Name:" id="f_name" name="first_name" placeholder=" first name" required/>
+                    <InputQuestion label="*First Name:" id="f_name" name="first_name" type="text" placeholder=" first name" required/>
 
-                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
+                    {/* <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="last_name">*Last Name:</label>
                         <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" placeholder=" last name" type="text" id="l_name" name="last_name" required />
-                    </div>
+                    </div> */}
 
-                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
+                    <InputQuestion label="*Last Name:" id="l_name" name="last_name" type="text" placeholder=" last name" required/>
+
+                    {/* <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="address">*Address:</label>
                         <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" placeholder=" home address" type="text" id="address" name="address" pattern="^(?=\S*\s)(?=\P{L}*\p{L})(?=\D*\d)[\p{L}\d\s',.#/-]*$" autoComplete="street-address" required />
-                    </div>
+                    </div> */}
 
-                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
+                    <InputQuestion label="*Address:" id="address" name="address" type="text" placeholder=" home address" pattern="^(?=\S*\s)(?=\P{L}*\p{L})(?=\D*\d)[\p{L}\d\s',.#/-]*$" autoComplete="street-address" required/>
+
+                    {/* <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="county">*Country:</label>
                         <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" placeholder=" country" type="text" id="country" name="country" autoComplete="country-name" required />
-                    </div>
+                    </div> */}
 
-                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
+                    <InputQuestion label="*Country:" id="country" name="country" type="text" placeholder=" country" autoComplete="country-name" required/>
+
+                    {/* <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="city">*City:</label>
                         <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" placeholder=" city" type="text" id="city" name="city" required />
-                    </div>
+                    </div> */}
+
+                    <InputQuestion label="*City:" id="city" name="city" type="text" placeholder=" city" required/>
 
                     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="last_name">*State/Province:</label>
@@ -114,25 +122,33 @@ export const DogForm = () => {
                         </select>
                     </div>
 
-                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
+                    {/* <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="zip">*Zip/Postal Code:</label>
                         <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" placeholder=" zip/postal code" type="text" id="zip" name="zip" autoComplete="postal-code" pattern="\d{5}-?(\d{4})?" required />
-                    </div>
+                    </div> */}
 
-                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
+                    <InputQuestion label="*Zip/Postal Code:" id="zip" name="zip" type="text" placeholder=" zip/postal code" pattern="\d{5}-?(\d{4})?" autoComplete="postal-code" required/>
+
+                    {/* <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="home_phone">Home Phone:</label>
                         <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" placeholder=" home phone" type="tel" id="homePhone" name="homePhone"/>
-                    </div>
+                    </div> */}
 
-                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
+                    <InputQuestion label="Home Phone:" id="homePhone" name="homePhone" type="tel" placeholder=" home phone"/>
+
+                    {/* <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="cell">*Cell Phone:</label>
                         <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" placeholder=" cell phone" type="yel" id="cell" name="cell" required />
-                    </div>
+                    </div> */}
 
-                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
+                    <InputQuestion label="*Cell Phone:" id="cell" name="cell" type="tel" placeholder=" cell phone" required/>
+
+                    {/* <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="email">*Email:</label>
                         <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" placeholder=" your_email@email.com" type="email" id="email" name="email" required />
-                    </div>
+                    </div> */}
+
+                    <InputQuestion label="*Email:" id="email" name="email" type="email" placeholder=" youremail@email.com" required/>
 
                     <div className="flex flex-row justify-end">
                         <button type="button" form="dogform" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 text-center text-slate-500 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Next</button>
@@ -141,10 +157,12 @@ export const DogForm = () => {
 
                 <div id="part2" className={page === 1 ? "" : "hidden "}>
 
-                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
+                    {/* <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="zip">*Page 2 Question:</label>
                         <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="text" id="quest2" name="quest1" autoComplete="TODO " required />
-                    </div>
+                    </div> */}
+
+                    <InputQuestion label="*Page 2 Question:" id="quest2" name="quest1" type="text" required/>
 
                     <div className="flex flex-row justify-end">
                         <button type="button" onClick={() => setPage(0)} className="flex flex-col pt-2 pb-2 px-2 text-center text-slate-500 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Previous</button>
@@ -154,10 +172,12 @@ export const DogForm = () => {
 
                 <div id="part3" className={page === 2 ? "" : "hidden "}>
 
-                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
+                    {/* <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
                         <label className="font-extralight text-slate-400" for="zip">*Page 3 Question:</label>
                         <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="text" id="quest2" name="quest1" autoComplete="TODO " required />
-                    </div>
+                    </div> */}
+
+                    <InputQuestion label="*Page 3 Question:" id="quest3" name="quest1" type="text" required/>
 
 
                     <div className="flex flex-row justify-end">
@@ -172,7 +192,7 @@ export const DogForm = () => {
     );
 }
 
-function InputQuestion({label, name, id, ...args }) {
+function InputQuestion({label, name, id, type, ...args }) {
     return(
     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
         <label className="font-extralight text-slate-400" for={name}>{label}</label>
