@@ -23,25 +23,25 @@ export const DogForm = () => {
             <form id="dogform" className="flex p-8 justify-center m-3 bg-stone-50 min-w-min min-h-min rounded-sm border- border-stone-50 border-8">
                 <div id= "part1" className={page === 0 ? "" : "hidden "}>
 
-                    <InputQuestion label="*First Name:" id="f_name" name="first_name" type="text" placeholder=" first name" required/>
+                    <InputQuestion label="*First Name:" id="f_name" name="first_name" placeholder=" first name" required/>
 
 
-                    <InputQuestion label="*Last Name:" id="l_name" name="last_name" type="text" placeholder=" last name" required/>
-
-                    
-
-                    <InputQuestion label="*Address:" id="address" name="address" type="text" placeholder=" home address" pattern="^(?=\S*\s)(?=\P{L}*\p{L})(?=\D*\d)[\p{L}\d\s',.#/-]*$" autoComplete="street-address" required/>
+                    <InputQuestion label="*Last Name:" id="l_name" name="last_name" placeholder=" last name" required/>
 
                     
 
-                    <InputQuestion label="*Country:" id="country" name="country" type="text" placeholder=" country" autoComplete="country-name" required/>
+                    <InputQuestion label="*Address:" id="address" name="address" placeholder=" home address" pattern="^(?=\S*\s)(?=\P{L}*\p{L})(?=\D*\d)[\p{L}\d\s',.#/-]*$" autoComplete="street-address" required/>
+
+                    
+
+                    <InputQuestion label="*Country:" id="country" name="country" placeholder=" country" autoComplete="country-name" required/>
 
 
-                    <InputQuestion label="*City:" id="city" name="city" type="text" placeholder=" city" required/>
+                    <InputQuestion label="*City:" id="city" name="city" placeholder=" city" required/>
 
 
                     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-orange-300 rounded-sm border-orange-300 border-4 m-2">
-                        <label className="font-sans text-white" for="last_name">*State/Province:</label>
+                        <label className="font-sans text-white" for="stateprovince">*State/Province:</label>
                         <select className="h-10 w-30 bg-stone-200 rounded-sm border-orange-400 border-2" id="stateprovince" name="stateprovince" required> 
                             <option value="" selected disabled>Select your state/province</option>
                             <option value="AL">Alabama</option>
@@ -104,9 +104,18 @@ export const DogForm = () => {
                             <option value="NA">Not a US City</option>
                         </select>
                     </div>
+                    
+                    {/*
+                    
+                    // Only commented this out because I didn't have time to copy/paste these answers yet
+                    
+                    <ListQuestion label="*State/Province" id="stateprovince" name="stateprovince" selectText="Select your state/province" required questions={[
+                        {val : "AL", name : "Alabama"}
+                    ]}/>
+                    
+                    */}
 
-
-                    <InputQuestion label="*Zip/Postal Code:" id="zip" name="zip" type="text" placeholder=" zip/postal code" pattern="\d{5}-?(\d{4})?" autoComplete="postal-code" required/>
+                    <InputQuestion label="*Zip/Postal Code:" id="zip" name="zip" placeholder=" zip/postal code" pattern="\d{5}-?(\d{4})?" autoComplete="postal-code" required/>
 
 
                     <InputQuestion label="Home Phone:" id="homePhone" name="homePhone" type="tel" placeholder=" home phone"/>
@@ -123,8 +132,65 @@ export const DogForm = () => {
                 </div>
 
                 <div id="part2" className={page === 1 ? "" : "hidden "}>
-
-                    <InputQuestion label="*Page 2 Question:" id="quest2" name="quest1" type="text" required/>
+                    {/* 
+                    // What size dog
+                    // What breed of dog
+                    // How much are you willing to train your dog
+                    // How much would you be able to walk your dog each day
+                    // How much you want it to bark
+                    // How much shedding you care for
+                    // How energetic do you want dog
+                    // How frequently can you / do you want to care for dog grooming needs
+                     */}
+                    
+                    <ListQuestion label="*What size dog:" id="d_size" name="dog_size" selectText="Select your preferred size" required questions={[
+                        {id : "S", name : "Small"},
+                        {id : "M", name : "Medium"},
+                        {id : "L", name : "Large"},
+                        {id : "NA", name : "Don't mind"}
+                    ]} />
+                    
+                    <InputQuestion label="*What breed of dog:" id="breed" name="dog_breed" required />
+                    
+                    <ListQuestion label="*How much are you willing to train your dog:" id="d_train" name="dog_training" selectText="--" required questions={[
+                        {id : "L", name : "Not at all"},
+                        {id : "M", name : "I'd be willing to do basic training"},
+                        {id : "H", name : "I want to train my dog to a high standard"},
+                        {id : "NA", name : "Don't mind"}
+                    ]} />
+                    
+                    <ListQuestion label="*How much are you willing to walk your dog every day:" id="d_walk" name="dog_walking" selectText="--" required questions={[
+                        {id : "L", name : "<1 hour a day"},
+                        {id : "M", name : "1-2 hours a day"},
+                        {id : "H", name : ">2 hours a day"},
+                        {id : "NA", name : "Don't mind"}
+                    ]} />
+                    
+                    <ListQuestion label="*How vocal do you want your dog to be:" id="d_bark" name="dog_barking" selectText="--" required questions={[
+                        {id : "L", name : "I prefer quieter dogs"},
+                        {id : "H", name : "I would like a chatty dog"},
+                        {id : "NA", name : "Don't mind"}
+                    ]} />
+                    
+                    <ListQuestion label="*How much shedding would you mind your dog doing:" id="d_shed" name="dog_shedding" selectText="--" required questions={[
+                        {id : "L", name : "I want a hypo-allergenic dog"},
+                        {id : "M", name : "I would prefer less shedding"},
+                        {id : "H", name : "I don't mind how much they shed"}
+                    ]} />
+                    
+                    <ListQuestion label="*How energetic do you want your dog to be:" id="d_energy" name="dog_energetic" selectText="--" required questions={[
+                        {id : "L", name : "I want a calm, cool, collected dog"},
+                        {id : "M", name : "I want a dog with an average amount of energy"},
+                        {id : "H", name : "I want an extremely active dog"},
+                        {id : "NA", name : "Don't mind"}
+                    ]} />
+                    
+                    <ListQuestion label="*How frequenly would you mind grooming your dog:" id="d_groom" name="dog_grooming" selectText="--" required questions={[
+                        {id : "L", name : "I could groom my dog once a week"},
+                        {id : "M", name : "I can groom my dog a few times a week"},
+                        {id : "H", name : "I have time to groom my dog every day"},
+                        {id : "NA", name : "Don't mind"}
+                    ]} />
 
                     <div className="flex flex-row justify-end">
                         <button type="button" onClick={() => setPage(0)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-orange-400 rounded-sm border-orange-400 border-4 m-2">Previous</button>
@@ -152,7 +218,19 @@ function InputQuestion({label, name, id, type, ...args }) {
     return(
     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full min-h-min min-w-min align-top bg-orange-300 rounded-sm border-orange-300 border-4 m-2">
         <label className="font-sans text-lg text-white" for={name}>{label}</label>
-        <input className="h-10 w-30 bg-slate-200 rounded-sm border-orange-400 border-2" type={type} id={id} name={name} {...args} />
+        <input className="h-10 w-30 bg-slate-200 rounded-sm border-orange-400 border-2" type="text" id={id} name={name} {...args} />
+    </div>
+    );
+}
+
+function ListQuestion({label, name, id, selectText, questions, ...args}) {
+    return(
+    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-orange-300 rounded-sm border-orange-300 border-4 m-2">
+        <label className="font-sans text-white" for={name}>{label}</label>
+        <select className="h-10 w-30 bg-stone-200 rounded-sm border-orange-400 border-2" id={id} name={name} {...args}> 
+            <option value="" selected disabled>{selectText}</option>
+            {questions.map((questions) => (<option value={questions.val}>{questions.name}</option>))}
+        </select>
     </div>
     );
 }
