@@ -196,7 +196,7 @@ function InputQuestion({label, name, id, type, ...args }) {
     return(
     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
         <label className="font-extralight text-slate-400" for={name}>{label}</label>
-        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type="text" id={id} name={name} {...args} />
+        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type={type} id={id} name={name} {...args} />
     </div>
     );
 }
