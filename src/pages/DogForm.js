@@ -16,11 +16,11 @@ export const DogForm = () => {
     const [page, setPage] = useState(0);
 
     return (
-        <main className="flex flex-col items-center bg-gray-200 w-full h-full">
+        <main className="flex flex-col items-center bg-lime-700 w-full h-full">
 
-            <h1 className="text-center text-6xl m-2 font-extralight h-11/12 w-11/12 p-5 text-orange-200 justify-center rounded-md border-orange-400 border-4 bg-slate-500">Dog Preference Form</h1>
+            <h1 className="text-center text-6xl m-2 font-serif h-11/12 w-11/12 p-5 text-white justify-center rounded-sm border-orange-400 border-4 bg-orange-400">Dog Preference Form</h1>
 
-            <form id="dogform" className="flex p-8 justify-center m-3 bg-slate-500 w-10/12 rounded-lg border-4 border-orange-400">
+            <form id="dogform" className="flex p-8 justify-center m-3 bg-stone-50 w-10/12 rounded-sm border- border-stone-50 border-8">
                 <div id= "part1" className={page === 0 ? "" : "hidden "}>
 
                     <InputQuestion label="*First Name:" id="f_name" name="first_name" type="text" placeholder=" first name" required/>
@@ -40,9 +40,9 @@ export const DogForm = () => {
                     <InputQuestion label="*City:" id="city" name="city" type="text" placeholder=" city" required/>
 
 
-                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
-                        <label className="font-extralight text-slate-400" for="last_name">*State/Province:</label>
-                        <select className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" id="stateprovince" name="stateprovince" required> 
+                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-orange-300 rounded-sm border-orange-300 border-4 m-2">
+                        <label className="font-sans text-white" for="last_name">*State/Province:</label>
+                        <select className="h-10 w-30 bg-stone-200 rounded-sm border-orange-400 border-2" id="stateprovince" name="stateprovince" required> 
                             <option value="" selected disabled>Select your state/province</option>
                             <option value="AL">Alabama</option>
                             <option value="AK">Alaska</option>
@@ -118,7 +118,7 @@ export const DogForm = () => {
                     <InputQuestion label="*Email:" id="email" name="email" type="email" placeholder=" youremail@email.com" required/>
 
                     <div className="flex flex-row justify-end">
-                        <button type="button" form="dogform" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 text-center text-slate-500 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Next</button>
+                        <button type="button" form="dogform" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-orange-400 rounded-sm border-orange-400 border-4 m-2">Next</button>
                     </div>
                 </div>
 
@@ -127,8 +127,8 @@ export const DogForm = () => {
                     <InputQuestion label="*Page 2 Question:" id="quest2" name="quest1" type="text" required/>
 
                     <div className="flex flex-row justify-end">
-                        <button type="button" onClick={() => setPage(0)} className="flex flex-col pt-2 pb-2 px-2 text-center text-slate-500 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Previous</button>
-                        <button type="button" onClick={() => setPage(2)} className="flex flex-col pt-2 pb-2 px-2 text-center text-slate-500 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Next</button>
+                        <button type="button" onClick={() => setPage(0)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-orange-400 rounded-sm border-orange-400 border-4 m-2">Previous</button>
+                        <button type="button" onClick={() => setPage(2)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-orange-400 rounded-sm border-orange-400 border-4 m-2">Next</button>
                     </div>
                 </div>
 
@@ -137,9 +137,9 @@ export const DogForm = () => {
                     <InputQuestion label="*Page 3 Question:" id="quest3" name="quest1" type="text" required/>
 
                     <div className="flex flex-row justify-end">
-                        <button type="button" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 text-center text-slate-500 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2">Previous</button>
+                        <button type="button" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-orange-400 rounded-sm border-orange-400 border-4 m-2">Previous</button>
 
-                        <button className="flex flex-col pt-2 pb-2 px-2 text-center text-slate-500 h-10 w-20 align-top bg-yellow-100 rounded-md border-orange-300 border-4 m-2" type="submit">Submit</button>
+                        <button className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-orange-400 rounded-sm border-orange-400 border-4 m-2" type="submit">Submit</button>
                     </div>
                 </div>
             </form>
@@ -150,9 +150,9 @@ export const DogForm = () => {
 
 function InputQuestion({label, name, id, type, ...args }) {
     return(
-    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-yellow-100 rounded-md border-orange-300 border-2 m-2">
-        <label className="font-extralight text-slate-400" for={name}>{label}</label>
-        <input className="h-10 w-30 bg-slate-200 rounded-lg border-gray-500 border-2" type={type} id={id} name={name} {...args} />
+    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-orange-300 rounded-sm border-orange-300 border-4 m-2">
+        <label className="font-sans text-lg text-white" for={name}>{label}</label>
+        <input className="h-10 w-30 bg-slate-200 rounded-sm border-orange-400 border-2" type={type} id={id} name={name} {...args} />
     </div>
     );
 }
