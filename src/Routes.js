@@ -8,7 +8,7 @@ export const RoutesApp = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Login />} />
+                <Route path="/" element={<LoginForm />} />
                 <Route path="/petform" element={<PetForm />} />
                 <Route path="/dogform" element={<DogForm />} />
                 <Route path="/catform" element={<CatForm />} />

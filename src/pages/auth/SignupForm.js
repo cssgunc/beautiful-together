@@ -18,6 +18,36 @@ export const SignupForm = () => {
         return getDoc( doc(db, userRef, uid) ).exists();
     }
 
+    /*
+
+    // TODO: figure out what information should be stored in a persistent profile
+    // and what should be requested with every application
+    // currently required information for an application is:
+        // profile
+            // first name, last name, age range (<18, <25, <55, <70, 70+),
+            // email, phone, + optional home phone, address (street + second line, city, zip, state, country)
+            // preferred contact method (email, home, cell, work)
+            // in school* -> full or part time
+            // employed* -> workday hours outside of home
+            // how did user hear about the site: 
+                                                // adopted before, internet, friend*, shelter*, another rescue*,
+                                                // FB, IG, Twitter, Petfinder, Adopt-a-Pet,
+                                                // Petco Adoption Event, PetSmart Adoption Event
+                                                // Other*
+                // * -> must give name of friend, which shelter/rescue, please describe (other)
+        
+        // other people in home
+            // other adults? (must provide info about each)
+            // other children? (yes/no)
+                // if cats: other cats? (must provide info about each)
+                // if dogs: have you had or do you have a dog? (must provide info about each)
+            // other pets? (must provide info about each)
+
+        // home
+            // type of residents, own/rent* -> if rent, provide info about landlord policy & contact info
+                // if dog, yard? -> fenced? 
+    */
+   
     const createFirebaseUser = async (f_name, l_name, addr, countr, cit, sta, z_code, h_phone, c_phone, email_addr) => {
         const newUser = {
             first_name: f_name, 
@@ -41,7 +71,7 @@ export const SignupForm = () => {
         // in order to get current user data, use getDoc( doc( db, "users", auth.currentUser.uid ) )
 
         firebase.auth().currentUser
-        createUserWithEmailAndPassword(auth, email_addr, password)
+        await createUserWithEmailAndPassword(auth, email_addr, password)
             .then(async (userCredential) => {
                 // Signed up 
                 const user = userCredential.user;
@@ -62,7 +92,6 @@ export const SignupForm = () => {
                 const errorMessage = error.message;
                 // ..
             });
-        
 
     };
 
