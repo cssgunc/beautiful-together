@@ -18,9 +18,9 @@ export const DogForm = () => {
     return (
         <main className="flex flex-col items-center bg-lime-700 w-full h-full">
 
-            <h1 className="text-center text-6xl m-2 font-serif h-11/12 w-11/12 p-5 text-white justify-center rounded-sm border-orange-400 border-4 bg-orange-400">Dog Preference Form</h1>
+            <h1 className="text-center text-5xl m-2 font-serif min-h-min min-w-min p-5 text-white justify-center rounded-sm border-orange-400 border-4 bg-orange-400">Dog Preference Form <i className="icomoon-e913"></i></h1>
 
-            <form id="dogform" className="flex p-8 justify-center m-3 bg-stone-50 w-10/12 rounded-sm border- border-stone-50 border-8">
+            <form id="dogform" className="flex p-8 justify-center m-3 bg-stone-50 min-w-min min-h-min rounded-sm border- border-stone-50 border-8">
                 <div id= "part1" className={page === 0 ? "" : "hidden "}>
 
                     <InputQuestion label="*First Name:" id="f_name" name="first_name" type="text" placeholder=" first name" required/>
@@ -150,7 +150,7 @@ export const DogForm = () => {
 
 function InputQuestion({label, name, id, type, ...args }) {
     return(
-    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-orange-300 rounded-sm border-orange-300 border-4 m-2">
+    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full min-h-min min-w-min align-top bg-orange-300 rounded-sm border-orange-300 border-4 m-2">
         <label className="font-sans text-lg text-white" for={name}>{label}</label>
         <input className="h-10 w-30 bg-slate-200 rounded-sm border-orange-400 border-2" type={type} id={id} name={name} {...args} />
     </div>
