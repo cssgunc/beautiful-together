@@ -18,9 +18,9 @@ export const DogForm = () => {
     return (
         <main className="flex flex-col items-center bg-lime-700 w-full h-full w-min-full h-min-full">
 
-            <h1 className="text-center text-5xl m-2 my-4 font-serif w-10/12 min-h-min min-w-min p-5 text-white justify-center rounded-sm border-orange-400 border-4 bg-orange-400">Dog Preference Form <i className="icomoon-e913"></i></h1>
+            <h1 className="text-center text-5xl m-2 my-4 font-serif w-10/12 min-h-min min-w-min p-5 text-white justify-center rounded-sm border-themeOrange border-4 bg-themeOrange">Dog Preference Form <i className="icomoon-e913"></i></h1>
 
-            <form id="dogform" className="flex p-8 justify-center m-3 bg-stone-50 w-5/6 min-w-min min-h-min rounded-sm border- border-stone-50 border-8">
+            <form id="dogform" className="flex p-8 justify-center m-3 bg-background w-5/6 min-w-min min-h-min rounded-md border- border-background border-8">
                 <div id= "part1" className={page === 0 ? "" : "hidden "}>
 
                     <InputQuestion label="*First Name:" id="f_name" name="first_name" placeholder=" first name" required/>
@@ -40,7 +40,7 @@ export const DogForm = () => {
                     <InputQuestion label="*City:" id="city" name="city" placeholder=" city" required/>
 
 
-                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-orange-300 rounded-sm border-orange-300 border-4 m-2">
+                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-themeOrange rounded-md border-themeOrange border-4 m-2">
                         <label className="font-sans text-white" for="stateprovince">*State/Province:</label>
                         <select className="h-10 w-60 bg-stone-200 rounded-sm border-orange-400 border-2" id="stateprovince" name="stateprovince" required> 
                             <option value="" selected disabled>Select your state/province</option>
@@ -127,7 +127,7 @@ export const DogForm = () => {
                     <InputQuestion label="*Email:" id="email" name="email" type="email" placeholder=" youremail@email.com" required/>
 
                     <div className="flex flex-row justify-end">
-                        <button type="button" form="dogform" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-orange-400 rounded-sm border-orange-400 border-4 m-2">Next</button>
+                        <button type="button" form="dogform" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2">Next</button>
                     </div>
                 </div>
 
@@ -193,8 +193,8 @@ export const DogForm = () => {
                     ]} />
 
                     <div className="flex flex-row justify-end">
-                        <button type="button" onClick={() => setPage(0)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-orange-400 rounded-sm border-orange-400 border-4 m-2">Previous</button>
-                        <button type="button" onClick={() => setPage(2)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-orange-400 rounded-sm border-orange-400 border-4 m-2">Next</button>
+                        <button type="button" onClick={() => setPage(0)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2">Previous</button>
+                        <button type="button" onClick={() => setPage(2)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2">Next</button>
                     </div>
                 </div>
 
@@ -215,9 +215,9 @@ export const DogForm = () => {
                     ]} />
 
                     <div className="flex flex-row justify-end">
-                        <button type="button" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-orange-400 rounded-sm border-orange-400 border-4 m-2">Previous</button>
+                        <button type="button" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2">Previous</button>
 
-                        <button className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-orange-400 rounded-sm border-orange-400 border-4 m-2" type="submit">Submit</button>
+                        <button className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2" type="submit">Submit</button>
                     </div>
                 </div>
             </form>
@@ -228,16 +228,16 @@ export const DogForm = () => {
 
 function InputQuestion({label, name, id, type, ...args }) {
     return(
-    <div className="flex flex-col pt-2 pb-4 px-3 w-full min-h-min min-w-min align-top bg-orange-300 rounded-sm border-orange-300 border-4 m-2">
+    <div className="flex flex-col pt-2 pb-4 px-3 w-full min-h-min min-w-min align-top bg-themeOrange rounded-md border-themeOrange border-4 m-2">
         <label className="font-sans text-wrap text-lg text-white" for={name}>{label}</label>
-        <input className="h-10 w-60 bg-stone-200 rounded-sm border-orange-400 border-2" type="text" id={id} name={name} {...args} />
+        <input className="h-10 w-60 bg-stone-200 rounded-sm border-themeOrange border-2" type="text" id={id} name={name} {...args} />
     </div>
     );
 }
 
 function ListQuestion({label, name, id, selectText, questions, ...args}) {
     return(
-    <div className="flex flex-col pt-2 pb-4 px-3 min-h-min w-full align-top bg-orange-300 rounded-sm border-orange-300 border-4 m-2">
+    <div className="flex flex-col pt-2 pb-4 px-3 min-h-min w-full align-top bg-themeOrange rounded-md border-themeOrange border-4 m-2">
         <label className="font-sans text-wrap text-white">{label}</label>
             {questions.map((question) => (
                 <div className=" space-x-2">
