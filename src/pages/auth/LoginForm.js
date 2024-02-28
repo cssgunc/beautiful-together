@@ -1,5 +1,6 @@
 import { db, auth } from "../../firebase-config.js";
-import { collection, addDoc, setDoc } from "firebase/firestore";
+// import { collection, addDoc, setDoc } from "firebase/firestore";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import './form.css';
 
@@ -50,6 +51,7 @@ export const LoginForm = () => {
                     <button
                         type="submit"
                         onClick={SignIn}>
+                            Log In
                     </button>
                 </form>
             </div>

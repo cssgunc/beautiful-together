@@ -1,16 +1,18 @@
 import { db, auth } from "../../firebase-config.js";
-import { collection, addDoc, setDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, getDoc, doc } from "firebase/firestore";
+import React, { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import './form.css';
 
 export const SignupForm = () => {
     const userRef = "users";
 
     // define email and password fields bound to html input fields
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email_field, setEmail] = useState("");
+    const [password_field, setPassword] = useState("");
 
     const checkEmailExists = async (email_addr) => {
-        const query = await this.db.collection(userRef).where("email", "==", "email_addr");
+        const query = await db.collection(userRef).where("email", "==", "email_addr");
         return !query.empty;
     };
 
@@ -35,7 +37,8 @@ export const SignupForm = () => {
                                                 // Petco Adoption Event, PetSmart Adoption Event
                                                 // Other*
                 // * -> must give name of friend, which shelter/rescue, please describe (other)
-        
+        */
+       /*
         // other people in home
             // other adults? (must provide info about each)
             // other children? (yes/no)
@@ -48,7 +51,18 @@ export const SignupForm = () => {
                 // if dog, yard? -> fenced? 
     */
    
+    /*
+    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-orange-300 rounded-sm border-orange-300 border-4 m-2">
+                        <label className="font-sans text-white" for="stateprovince">How did you hear about us?</label>
+                        <select className="h-10 w-30 bg-stone-200 rounded-sm border-orange-400 border-2" id="stateprovince" name="stateprovince" required> 
+                            <option value="" selected disabled> </option>
+                            <option value="">Adopted from this rescue before</option>
+
+    */
+
     const createFirebaseUser = async (f_name, l_name, addr, countr, cit, sta, z_code, h_phone, c_phone, email_addr) => {
+        email_addr = email_field;
+        console.log(email_field);
         const newUser = {
             first_name: f_name, 
             last_name: l_name, 
@@ -62,7 +76,7 @@ export const SignupForm = () => {
             email: email_addr
         };
         // check if the user already exists (there should only be 1 user per email address)
-        if (checkEmailExists(email_addr)) {
+        if (checkEmailExists(email_field)) {
             // TODO: redirect, or display notification that user already exists
             return "-1";
         }
@@ -70,8 +84,7 @@ export const SignupForm = () => {
         // use the user's UID token from Firebase Authentication as the custom Document ID in Firestore database
         // in order to get current user data, use getDoc( doc( db, "users", auth.currentUser.uid ) )
 
-        firebase.auth().currentUser
-        await createUserWithEmailAndPassword(auth, email_addr, password)
+        await createUserWithEmailAndPassword(auth, email_field, password_field)
             .then(async (userCredential) => {
                 // Signed up 
                 const user = userCredential.user;
@@ -107,18 +120,19 @@ export const SignupForm = () => {
                     <input
                         type="email"
                         placeholder="Enter your email"
-                        value={email}
+                        value={email_field}
                         onChange={(e) => setEmail(e.target.value)}>
                     </input>
                     <input
                         type="password"
                         placeholder="Enter your password"
-                        value={password}
+                        value={password_field}
                         onChange={(e) => setPassword(e.target.value)}>
                     </input>
                     <button
                         type="submit"
                         onClick={createFirebaseUser}>
+                            Sign Up
                     </button>
                 </form>
             </div>

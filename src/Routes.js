@@ -3,6 +3,7 @@ import {LoginForm} from './pages/auth/LoginForm'
 import {PetForm} from './pages/PetForm'
 import {CatForm} from './pages/CatForm'
 import {DogForm} from './pages/DogForm'
+import { SignupForm } from './pages/auth/SignupForm'
 
 export const RoutesApp = () => {
     return (
@@ -13,7 +14,7 @@ export const RoutesApp = () => {
                 <Route path="/dogform" element={<DogForm />} />
                 <Route path="/catform" element={<CatForm />} />
                 <Route path="/login" element={<LoginForm />} />
-                
+                <Route path="/signup" element={<SignupForm />} />
             </Routes>
         </Router>
     )
