@@ -16,11 +16,11 @@ export const DogForm = () => {
     const [page, setPage] = useState(0);
 
     return (
-        <main className="flex flex-col items-center bg-lime-700 w-full h-full w-min-full h-min-full">
+        <main className="flex flex-col items-center bg-backgroundGreen w-full h-full w-min-full h-min-full">
 
             <h1 className="text-center text-5xl m-2 my-4 font-serif w-10/12 min-h-min min-w-min p-5 text-white justify-center rounded-sm border-themeOrange border-4 bg-themeOrange">Dog Preference Form <i className="icomoon-e913"></i></h1>
 
-            <form id="dogform" className="flex p-8 justify-center m-3 bg-background w-5/6 min-w-min min-h-min rounded-md border- border-background border-8">
+            <form id="dogform" className="flex p-8 justify-center m-3 bg-background w-5/6 min-w-min min-h-min rounded-md border- border-stone-200 border-8">
                 <div id= "part1" className={page === 0 ? "" : "hidden "}>
 
                     <InputQuestion label="*First Name:" id="f_name" name="first_name" placeholder=" first name" required/>
@@ -42,7 +42,7 @@ export const DogForm = () => {
 
                     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-themeOrange rounded-md border-themeOrange border-4 m-2">
                         <label className="font-sans text-white" for="stateprovince">*State/Province:</label>
-                        <select className="h-10 w-60 bg-stone-200 rounded-sm border-orange-400 border-2" id="stateprovince" name="stateprovince" required> 
+                        <select className="h-10 w-60 bg-stone-200 rounded-md border-white border" id="stateprovince" name="stateprovince" required> 
                             <option value="" selected disabled>Select your state/province</option>
                             <option value="AL">Alabama</option>
                             <option value="AK">Alaska</option>
@@ -228,19 +228,20 @@ export const DogForm = () => {
 
 function InputQuestion({label, name, id, type, ...args }) {
     return(
-    <div className="flex flex-col pt-2 pb-4 px-3 w-full min-h-min min-w-min align-top bg-themeOrange rounded-md border-themeOrange border-4 m-2">
+    <div className="flex flex-col pt-2 pb-4 px-3 w-full min-h-min min-w-min align-top bg-themeOrange rounded-md border-white border m-2">
         <label className="font-sans text-wrap text-lg text-white" for={name}>{label}</label>
-        <input className="h-10 w-60 bg-stone-200 rounded-sm border-themeOrange border-2" type="text" id={id} name={name} {...args} />
+        <input className="h-10 w-60 bg-stone-200 rounded-md border-white border" type="text" id={id} name={name} {...args} />
     </div>
     );
 }
 
 function ListQuestion({label, name, id, selectText, questions, ...args}) {
     return(
-    <div className="flex flex-col pt-2 pb-4 px-3 min-h-min w-full align-top bg-themeOrange rounded-md border-themeOrange border-4 m-2">
+    <div className="flex flex-col pt-2 pb-4 px-3 min-h-min w-full align-top bg-themeOrange rounded-md border-white border m-2 space-y-2">
         <label className="font-sans text-wrap text-white">{label}</label>
+        <div className="border-2 p-2 rounded-lg border-white space-y-2">
             {questions.map((question) => (
-                <div className=" space-x-2">
+                <div className="space-x-2">
                     <input className="" type="radio" id={question.val} name={name} {...args} />
 
                     <label className="font-sans text-white text-wrap" for={question.val}>
@@ -248,6 +249,7 @@ function ListQuestion({label, name, id, selectText, questions, ...args}) {
                     </label>
                 </div>
             ))}
+            </div>
     </div>
     );
 }
