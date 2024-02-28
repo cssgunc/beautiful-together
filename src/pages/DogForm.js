@@ -16,11 +16,11 @@ export const DogForm = () => {
     const [page, setPage] = useState(0);
 
     return (
-        <main className="flex flex-col items-center bg-lime-700 w-full h-full">
+        <main className="flex flex-col items-center bg-lime-700 w-full h-full w-min-full h-min-full">
 
-            <h1 className="text-center text-5xl m-2 font-serif min-h-min min-w-min p-5 text-white justify-center rounded-sm border-orange-400 border-4 bg-orange-400">Dog Preference Form <i className="icomoon-e913"></i></h1>
+            <h1 className="text-center text-5xl m-2 my-4 font-serif w-10/12 min-h-min min-w-min p-5 text-white justify-center rounded-sm border-orange-400 border-4 bg-orange-400">Dog Preference Form <i className="icomoon-e913"></i></h1>
 
-            <form id="dogform" className="flex p-8 justify-center m-3 bg-stone-50 min-w-min min-h-min rounded-sm border- border-stone-50 border-8">
+            <form id="dogform" className="flex p-8 justify-center m-3 bg-stone-50 w-5/6 min-w-min min-h-min rounded-sm border- border-stone-50 border-8">
                 <div id= "part1" className={page === 0 ? "" : "hidden "}>
 
                     <InputQuestion label="*First Name:" id="f_name" name="first_name" placeholder=" first name" required/>
@@ -42,7 +42,7 @@ export const DogForm = () => {
 
                     <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-orange-300 rounded-sm border-orange-300 border-4 m-2">
                         <label className="font-sans text-white" for="stateprovince">*State/Province:</label>
-                        <select className="h-10 w-30 bg-stone-200 rounded-sm border-orange-400 border-2" id="stateprovince" name="stateprovince" required> 
+                        <select className="h-10 w-60 bg-stone-200 rounded-sm border-orange-400 border-2" id="stateprovince" name="stateprovince" required> 
                             <option value="" selected disabled>Select your state/province</option>
                             <option value="AL">Alabama</option>
                             <option value="AK">Alaska</option>
@@ -200,7 +200,19 @@ export const DogForm = () => {
 
                 <div id="part3" className={page === 2 ? "" : "hidden "}>
 
-                    <InputQuestion label="*Page 3 Question:" id="quest3" name="quest1" type="text" required/>
+                <ListQuestion label="*What qualities are you looking for in a canine companion?" id="d_groom" name="dog_grooming" selectText="--" required questions={[
+                        {id : "E", name : "Energetic and adventurous"},
+                        {id : "C", name : "Calm and laid-back"},
+                        {id : "A", name : "Affectionate and cuddly"},
+                        {id : "I", name : "Intelligent and trainable"}
+                    ]} />
+
+                <ListQuestion label="*How do you envision integrating a dog into your family dynamics or living situation?" id="d_groom" name="dog_grooming" selectText="--" required questions={[
+                        {id : "F", name : "The dog will be a central part of our family activities and routines."},
+                        {id : "O", name : "The dog will have its own space but will be included in family time."},
+                        {id : "C", name : "The dog will primarily be my companion but will interact with family members occasionally."},
+                        {id : "I", name : "The dog will be mostly independent and will have limited interaction with family members."}
+                    ]} />
 
                     <div className="flex flex-row justify-end">
                         <button type="button" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-orange-400 rounded-sm border-orange-400 border-4 m-2">Previous</button>
@@ -216,21 +228,26 @@ export const DogForm = () => {
 
 function InputQuestion({label, name, id, type, ...args }) {
     return(
-    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full min-h-min min-w-min align-top bg-orange-300 rounded-sm border-orange-300 border-4 m-2">
-        <label className="font-sans text-lg text-white" for={name}>{label}</label>
-        <input className="h-10 w-30 bg-slate-200 rounded-sm border-orange-400 border-2" type="text" id={id} name={name} {...args} />
+    <div className="flex flex-col pt-2 pb-4 px-3 w-full min-h-min min-w-min align-top bg-orange-300 rounded-sm border-orange-300 border-4 m-2">
+        <label className="font-sans text-wrap text-lg text-white" for={name}>{label}</label>
+        <input className="h-10 w-60 bg-stone-200 rounded-sm border-orange-400 border-2" type="text" id={id} name={name} {...args} />
     </div>
     );
 }
 
 function ListQuestion({label, name, id, selectText, questions, ...args}) {
     return(
-    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-orange-300 rounded-sm border-orange-300 border-4 m-2">
-        <label className="font-sans text-white" for={name}>{label}</label>
-        <select className="h-10 w-30 bg-stone-200 rounded-sm border-orange-400 border-2" id={id} name={name} {...args}> 
-            <option value="" selected disabled>{selectText}</option>
-            {questions.map((questions) => (<option value={questions.val}>{questions.name}</option>))}
-        </select>
+    <div className="flex flex-col pt-2 pb-4 px-3 min-h-min w-full align-top bg-orange-300 rounded-sm border-orange-300 border-4 m-2">
+        <label className="font-sans text-wrap text-white">{label}</label>
+            {questions.map((question) => (
+                <div className=" space-x-2">
+                    <input className="" type="radio" id={question.val} name={name} {...args} />
+
+                    <label className="font-sans text-white text-wrap" for={question.val}>
+                        {question.name}
+                    </label>
+                </div>
+            ))}
     </div>
     );
 }
