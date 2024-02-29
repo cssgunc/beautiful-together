@@ -200,14 +200,14 @@ export const DogForm = () => {
 
                 <div id="part3" className={page === 2 ? "" : "hidden "}>
 
-                <ListQuestion label="*What qualities are you looking for in a canine companion?" id="d_groom" name="dog_grooming" selectText="--" required questions={[
+                <ListQuestion label="*What qualities are you looking for in a canine companion?" id="d_quality" name="dog_qualities" selectText="--" required questions={[
                         {id : "E", name : "Energetic and adventurous"},
                         {id : "C", name : "Calm and laid-back"},
                         {id : "A", name : "Affectionate and cuddly"},
                         {id : "I", name : "Intelligent and trainable"}
                     ]} />
 
-                <ListQuestion label="*How do you envision integrating a dog into your family dynamics or living situation?" id="d_groom" name="dog_grooming" selectText="--" required questions={[
+                <ListQuestion label="*How do you envision integrating a dog into your family dynamics or living situation?" id="d_integrate" name="dog_integration" selectText="--" required questions={[
                         {id : "F", name : "The dog will be a central part of our family activities and routines."},
                         {id : "O", name : "The dog will have its own space but will be included in family time."},
                         {id : "C", name : "The dog will primarily be my companion but will interact with family members occasionally."},
@@ -241,13 +241,13 @@ function ListQuestion({label, name, id, selectText, questions, ...args}) {
         <label className="font-sans text-wrap text-white">{label}</label>
         <div className="border-2 p-2 rounded-lg border-white space-y-2">
             {questions.map((question) => (
-                <div className="space-x-2">
+                <fieldset id={id} className="space-x-2">
                     <input className="" type="radio" id={question.val} name={name} {...args} />
 
                     <label className="font-sans text-white text-wrap" for={question.val}>
                         {question.name}
                     </label>
-                </div>
+                </fieldset>
             ))}
             </div>
     </div>
