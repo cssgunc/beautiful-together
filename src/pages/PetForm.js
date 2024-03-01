@@ -12,6 +12,7 @@ import {useNavigate} from 'react-router-dom';
  *
  */
 export const PetForm = () => {
+
     const navigate = useNavigate();
   
     const handleDogFormClick = () => {
@@ -33,7 +34,6 @@ export const PetForm = () => {
             </button>
 
         </div>
+
     );
-
 }
-
