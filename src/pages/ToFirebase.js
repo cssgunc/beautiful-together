@@ -8,12 +8,24 @@ import { addDoc, collection, doc } from 'firebase/firestore';
 async function addPetSurvey(ageRange, kids, livingConditions, activity, num_of_pets,
      pet_preference, travel, other_pets, follow_up, time_for_pet,
       why, allergies, previous_owner, yard, additional_info ) {
+        // should we specify data type?
 
         const petSurveyData= {
-           PetSurvey: {
-            // 
-           }
-
+           age_range: ageRange,
+           kids_under_13: kids,
+           living_condition: livingConditions,
+           activity_level: activity,
+           num_pets: num_of_pets,
+           pet_preferences: pet_preference,
+           travel_often: travel,
+           other_pet: other_pets,
+           pet_pref_followup: follow_up,
+           time_allocated: time_for_pet,
+           why_pet: why,
+           household_allergies: allergies,
+           pet_owned_before: previous_owner,
+           fenced_yard: yard,
+           more_info: additional_info
         }
 
     
@@ -22,7 +34,7 @@ async function addPetSurvey(ageRange, kids, livingConditions, activity, num_of_p
         const docRef = await addDoc(collection(db, "pet_Survey"), petSurveyData);
         console.log('Document written with ID: ', docRef.id);
     } catch (error) {
-        console.error('Erroe adding document: ', error);
+        console.error('Error adding document: ', error);
         }
     }
     export { addPetSurvey };
