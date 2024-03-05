@@ -1,12 +1,13 @@
 "use client";
 import { useState } from "react"; 
 
+
 export const CatForm = () => {
     const [page, setPage] = useState(0);
     return (
         <main className="flex flex-col items-center bg-backgroundGreen w-full h-full w-min-full h-min-full">
 
-            <h1 className="text-center text-5xl m-2 my-4 font-serif w-10/12 min-h-min min-w-min p-5 text-white justify-center rounded-sm border-themeOrange border-4 bg-themeOrange">Cat Preference Form <i className="icomoon-e913"></i></h1>
+            <h1 className="text-center text-5xl m-2 my-4 font-serif w-10/12 min-h-min min-w-min p-5 text-white justify-center rounded-sm border-themeOrange border-4 bg-themeOrange">Cat Preference Form<i className="icomoon-e913"></i></h1>
 
             <form id="catform" className="flex p-8 justify-center m-3 bg-background w-5/6 min-w-min min-h-min rounded-md border- border-stone-200 border-8">
                 <div id="part1" className={page === 0 ? "": "hidden"}>
