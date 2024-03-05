@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react"; 
 
-
 export const CatForm = () => {
     const [page, setPage] = useState(0);
     return (
@@ -151,33 +150,46 @@ export const CatForm = () => {
                     </div>
                 </div>
 
-                <div id="part2" className={page === 1 ? "" : "hidden "}></div>
-                <ListQuestion label="What age cat are you interested in adopting?: " id="c_size" selectText="Select your preferred age" required questions={[
+                <div id="part2" className={page === 1 ? "" : "hidden "}>
+                <ListQuestion label="*What age cat are you interested in adopting?: " id="c_size" selectText="--" required questions={[
                     {id : "K", name: "Kitten"},
                     {id : "Y", name: "Young Adult"},
                     {id : "A", name: "Adult"},
                     {id : "S", name: "Senior"}
                 ]} />
-                <InputQuestion label="What breed of cat: " id="breed" name="cat_breed" required  />
+                <InputQuestion label="*What breed of cat?: " id="breed" name="cat_breed" required  />
 
-                <ListQuestion label="What fur length do you prefer?" id="fur_length" selectText="Select your preferred fur length" required questions={[
+                <ListQuestion label="*What fur length do you prefer?: " id="fur_length" selectText="--" required questions={[
                     {id : "S", name: "Shorthair"},
                     {id : "L", name: "Longhair"}
                 ]} />
+                <ListQuestion label="Is your home suitable for an indoor, outdoor, or both indoor/outdoor cat?: " id="suitable_home" selectText="--" required questions={[
+                    {id : "I", name: "Indoor"},
+                    {id : "O", name: "Outdoor"},
+                    {id : "B", name: "Both Indoor/Outdoor"}
+                ]} />
+                    <div className="flex flex-row justify-end">
+                        <button type="button" onClick={() => setPage(0)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2">Previous</button>
+                        <button type="button" onClick={() => setPage(2)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2">Next</button>
+                    </div>
+                </div>
 
-                
-
-                
-
-
-                
-                
-
-
-                
-
-                
-
+                <div id="part3" className={page === 2 ? "" : "hidden "}>
+                    <ListQuestion label="*My Cat needs to be able to be alone..." id="alone_time" name="cat_independency" selectText="--" required questions={[
+                        {id : "M", name: "More than 9 hours per day."},
+                        {id : "A", name: "Around 4-8 hours per day."},
+                        {id : "L", name: "Less than 4 hours a day."}
+                    ]} />
+                    <ListQuestion label="*When I am at home, I want my cat to be by my side or in my lap..." id="quality_time" name="cat_time" selectText="--" required questions={[
+                        {id : "L", name: "Little of the time."},
+                        {id : "S", name: "Some of the time."},
+                        {id : "A", name: "All of the time."}
+                    ]} />
+                    <div className="flex flex-row justify-end">
+                        <button type="button" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2">Previous</button>
+                        <button className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2" type="submit">Submit</button>
+                    </div>
+                </div>
             </form>
         </main>
     );
