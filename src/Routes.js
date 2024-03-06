@@ -14,6 +14,7 @@ export const RoutesApp = () => {
                 <Route path="/dogform" element={<DogForm />} />
                 <Route path="/catform" element={<CatForm />} />
                 <Route path="/petselection" element={<PetSelection />} />
+                <Route path="/login" element={<Login />} />
             </Routes>
         </Router>
     )
