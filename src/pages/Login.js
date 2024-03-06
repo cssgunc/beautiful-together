@@ -20,15 +20,28 @@ export const Login = () => {
     };
 
     return (
-        <div>
-            <header>Welcome to Beautiful Together</header>
-            <p>Learn more about Beautiful Together <a href='https://beautifultogethersanctuary.com/'>here</a></p>
-            <p>Learn the basics of our stack</p>
-
-            <li><a href="https://www.youtube.com/watch?v=vAoB4VbhRzM">Firebase</a></li>
-            <li><a href="https://www.youtube.com/watch?v=Tn6-PIqc4UM">React</a></li>
-            <li><a href="https://www.youtube.com/watch?v=Tn6-PIqc4UM">React</a></li>
-            <li><a href="https://youtu.be/mr15Xzb1Ook?si=5sDVCpSIBFxwa7UY">TailwindCSS</a></li>
-        </div>
+        
+        <body class="bg-gray-100 flex items-center justify-center h-screen">
+  <div class="bg-white p-8 rounded shadow-md w-full max-w-sm">
+    <form action="#" method="POST">
+      <div class="mb-6">
+        <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+        <input type="text" id="username" name="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="username"></input>
+      </div>
+      <div class="mb-6">
+        <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+        <input type="password" id="password" name="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" placeholder="********"></input>
+      </div>
+      <div class="flex items-center justify-between">
+        <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+          Login
+        </button>
+        <a class="inline-block align-baseline font-bold text-sm text-orange-500 hover:text-orange-800" href="#">
+          Create Account
+        </a>
+      </div>
+    </form>
+  </div>
+</body>
     );
 }
