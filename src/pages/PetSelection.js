@@ -19,8 +19,8 @@ export const PetSelection = () => {
         oldLeft.disabled = true;
         oldRight.disabled = true;
 
-        setTimeout(() => hide(oldId), 1000);
-        setTimeout(() => enableButtons(newId), 2000);
+        setTimeout(() => hide(oldId), 750);
+        setTimeout(() => enableButtons(newId), 1500);
     }
 
     const hide = (id) => {
