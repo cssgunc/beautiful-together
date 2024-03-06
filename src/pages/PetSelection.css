@@ -1,0 +1,34 @@
+@media screen and (max-width: 950px) {
+    .outsideDiv {
+        position: relative;
+    }
+
+    .outsideDiv > div {
+        position: absolute;
+    }
+
+    .normal {
+        transition-property: transform, opacity;
+        transition-duration: 0.75s;
+        transition-timing-function: linear;
+        z-index: 2
+    }
+
+    .normal.background {
+        opacity: 0;
+        visibility: hidden;
+        z-index: 1;
+    }
+
+    .normal.swipeleft {
+        transform: rotate(-30deg);
+        transform-origin: bottom left;
+        opacity: 0;
+    }
+
+    .normal.swiperight {
+        transform: rotate(30deg);
+        transform-origin: bottom right;
+        opacity: 0;
+    }
+}
