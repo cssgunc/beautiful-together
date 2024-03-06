@@ -17,10 +17,10 @@ export const CatForm = () => {
                     <InputQuestion label="*Country:" id="country" name="country" placeholder=" country" autoComplete="country-name" required/>
                     <InputQuestion label="*City:" id="city" name="city" placeholder=" city" required/>
 
-                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-themeOrange rounded-md border-themeOrange border-4">
+                    <div className="flex flex-col pt-2 pb-4 px-3 h-20 w-full align-top bg-themeOrange rounded-md border-themeOrange border-4 m-2">
                         <label className="font-sans text-white" for="stateprovince">*State/Province:</label>
                         <select className="h-10 w-60 bg-stone-200 rounded-md border-white border" id="stateprovince" name="stateprovince" required>
-                        <option value="" selected disabled>Select your state/province</option>
+                            <option value="" selected disabled>Select your state/province</option>
                             <option value="AL">Alabama</option>
                             <option value="AK">Alaska</option>
                             <option value="AZ">Arizona</option>
@@ -82,58 +82,6 @@ export const CatForm = () => {
                         </select>
                     </div>
 
-                    <ListQuestion label="*Zip/Postal Code:" id="stateprovince" name="stateprovince" selectText="Select your state/province" required questions={[
-                        { val: "AL", name: "Alabama" },
-                        { val: "AK", name: "Alaska" },
-                        { val: "AZ", name: "Arizona" },
-                        { val: "AR", name: "Arkansas" },
-                        { val: "CA", name: "California" },
-                        { val: "CO", name: "Colorado" },
-                        { val: "CT", name: "Connecticut" },
-                        { val: "DE", name: "Delaware" },
-                        { val: "FL", name: "Florida" },
-                        { val: "GA", name: "Georgia" },
-                        { val: "HI", name: "Hawaii" },
-                        { val: "ID", name: "Idaho" },
-                        { val: "IL", name: "Illinois" },
-                        { val: "IN", name: "Indiana" },
-                        { val: "IA", name: "Iowa" },
-                        { val: "KS", name: "Kansas" },
-                        { val: "KY", name: "Kentucky" },
-                        { val: "LA", name: "Louisiana" },
-                        { val: "ME", name: "Maine" },
-                        { val: "MD", name: "Maryland" },
-                        { val: "MA", name: "Massachusetts" },
-                        { val: "MI", name: "Michigan" },
-                        { val: "MN", name: "Minnesota" },
-                        { val: "MS", name: "Mississippi" },
-                        { val: "MO", name: "Missouri" },
-                        { val: "MT", name: "Montana" },
-                        { val: "NE", name: "Nebraska" },
-                        { val: "NV", name: "Nevada" },
-                        { val: "NH", name: "New Hampshire" },
-                        { val: "NJ", name: "New Jersey" },
-                        { val: "NM", name: "New Mexico" },
-                        { val: "NY", name: "New York" },
-                        { val: "NC", name: "North Carolina" },
-                        { val: "ND", name: "North Dakota" },
-                        { val: "OH", name: "Ohio" },
-                        { val: "OK", name: "Oklahoma" },
-                        { val: "OR", name: "Oregon" },
-                        { val: "PA", name: "Pennsylvania" },
-                        { val: "RI", name: "Rhode Island" },
-                        { val: "SC", name: "South Carolina" },
-                        { val: "SD", name: "South Dakota" },
-                        { val: "TN", name: "Tennessee" },
-                        { val: "TX", name: "Texas" },
-                        { val: "UT", name: "Utah" },
-                        { val: "VT", name: "Vermont" },
-                        { val: "VA", name: "Virginia" },
-                        { val: "WA", name: "Washington" },
-                        { val: "WV", name: "West Virginia" },
-                        { val: "WI", name: "Wisconsin" },
-                        { val: "WY", name: "Wyoming" }
-                    ]}/>
 
                     <InputQuestion label="*Zip/Postal Code:" id="zip" name="zip" placeholder=" zip/postal code" pattern="\d{5}-?(\d{4})?" autoComplete="postal-code" required/>
 
