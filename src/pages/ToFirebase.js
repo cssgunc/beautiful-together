@@ -1,4 +1,4 @@
-import { db } from './firebase-config.js';
+import { db } from '../firebase-config.js';
 import { addDoc, collection, doc } from 'firebase/firestore';
 
 // I just made this file like a copy of responseEmail
