@@ -6,7 +6,7 @@ const max = new Pet('3', 'Max', 'Loyal and friendly', 'Dog', 'Golden Retriever',
 
 let availablePets = [fido, spot, max];
 export const PetSelection = () => {
-
+    // replace the "true" with boolean expression for whether there are more dogs left
     return true ? (
         
         <main className="w-full h-screen bg-background flex justify-center"> {/* side-background for non-mobile users */}
@@ -33,7 +33,7 @@ export const PetSelection = () => {
                     <button onClick=""><img alt="heartbutton"></img></button>
                 </div>
             </div>
-            <div> {/* gray screen over for info screen (hidden initially) */}
+            <div className="hidden"> {/* gray screen over for info screen (hidden initially, un-hide when info button clicked) */}
                 <div></div> {/* pet info popup */}
             </div>
         </main>
