@@ -34,7 +34,23 @@ export const PetSelection = () => {
                 </div>
             </div>
             <div className="hidden"> {/* gray screen over for info screen (hidden initially, un-hide when info button clicked) */}
-                <div></div> {/* pet info popup */}
+            <div className="flex justify-center p-4 contentpcenter w-full h-full min-w-[70vh] min-h-max bg-gray-700 bg-opacity-30">
+                <div className="flex flex-col max-w-[60vh] max-h-9/10 bg-white p-4 rounded-sm shadow-lg"> {/* info screen */}
+                    <h1 className="text-themeOrange font-bold text-3xl">Pet Name</h1>
+                    <p className="text-themeOrange">
+                    <img alt="pet_breed_icon" className="inline mr-2"></img>
+                    Pet breed name</p>
+                    <p className="text-themeOrange">
+                        <img alt="pet_gender_icon" className="inline mr-2"></img>
+                        Pet gender</p>
+                    <p className="text-themeOrange">
+                        <img alt="pet_age_icon" className="inline mr-2"></img>
+                        Pet age</p>
+                    <p className='flex-grow'>
+                        Super long info about how incredible of a dog this is
+                    </p>
+                </div>
+            </div>
             </div>
         </main>
 
