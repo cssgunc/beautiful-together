@@ -33,8 +33,9 @@ export const PetSelection = () => {
                     <button onClick=""><img alt="heartbutton"></img></button>
                 </div>
             </div>
-            <div className="hidden"> {/* gray screen over for info screen (hidden initially, un-hide when info button clicked) */}
-            <div className="flex justify-center p-4 contentpcenter w-full h-full min-w-[70vh] min-h-max bg-gray-700 bg-opacity-30">
+            {/* gray screen over for info screen (hidden initially, replace true with false to 
+                un-hide when info button clicked) */}
+            <div className={(true ? ("hidden") : ("")) + " absolute flex justify-center p-4 contentpcenter w-full h-full max-w-[70vh] min-h-max bg-gray-700 bg-opacity-30"}>
                 <div className="flex flex-col max-w-[60vh] max-h-9/10 bg-white p-4 rounded-sm shadow-lg"> {/* info screen */}
                     <h1 className="text-themeOrange font-bold text-3xl">Pet Name</h1>
                     <p className="text-themeOrange">
@@ -50,7 +51,6 @@ export const PetSelection = () => {
                         Super long info about how incredible of a dog this is
                     </p>
                 </div>
-            </div>
             </div>
         </main>
 
