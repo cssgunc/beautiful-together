@@ -56,9 +56,11 @@ export const PetSelection = () => {
 
     )
     : (
-        <main>
-            <img></img> {/* heartbreak pic */}
-            <div></div> {/* out of pets text */}
+        <main className="flex flex-col justify-center items-center w-full h-screen bg-themeOrange">
+            <img alt="broken_heart" className=""></img> {/* heartbreak pic */}
+            <p className="text-center font-bold w-[50vh]">
+                We've run out of pets to show at the moment. Please check back in later.
+            </p> {/* out of pets text */}
         </main>
     );
     
