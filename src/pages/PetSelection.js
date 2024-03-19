@@ -12,8 +12,8 @@ export const PetSelection = () => {
         <main className="w-full h-screen bg-background flex justify-center"> {/* side-background for non-mobile users */}
             <div className="h-full w-full max-w-[70vh] bg-white flex flex-col p-4"> {/* actual tinder slide, scaled to viewport height */}
                 <div className="flex justify-between"> {/* bars at top */}
-                    <div className="flex-grow mx-2 h-full p-1 bg-black"></div>
-                    <div className="flex-grow mx-2 h-full p-1 bg-black"></div>
+                    <div className="flex-grow rounded mx-2 h-full p-1 bg-black"></div>
+                    <div className="flex-grow rounded mx-2 h-full p-1 bg-black"></div>
                 </div>
                 <div className="mt-auto p-4"> {/* brief pet name & stats */}
                     <h1 className="text-themeOrange font-bold text-3xl">Pet Name</h1>
