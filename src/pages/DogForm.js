@@ -101,7 +101,7 @@ export const DogForm = () => {
                             <option value="PR">Puerto Rico</option>
                             <option value="UM">United States Minor Outlying Islands</option>
                             <option value="VI">Virgin Islands</option>
-                            <option value="NA">Not a US City</option>
+                            <option value="NA">Not a US State</option>
                         </select>
                     </div>
                     
@@ -192,10 +192,23 @@ export const DogForm = () => {
                         {id : "NA", name : "Don't mind"}
                     ]} />
 
-                    <div className="flex flex-row justify-end">
-                        <button type="button" onClick={() => setPage(0)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2">Previous</button>
-                        <button type="button" onClick={() => setPage(2)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2">Next</button>
-                    </div>
+<div className="flex flex-row justify-end">
+  <button
+    type="button"
+    onClick={() => setPage(0)}
+    className="flex justify-center items-center pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 bg-passiveGreen rounded-md border-passiveGreen border-4 m-2"
+  >
+    Previous
+  </button>
+
+  <button
+    type="button"
+    onClick={() => setPage(2)}
+    className="flex justify-center items-center pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 bg-passiveGreen rounded-md border-passiveGreen border-4 m-2"
+  >
+    Next
+  </button>
+</div>
                 </div>
 
                 <div id="part3" className={page === 2 ? "" : "hidden "}>
