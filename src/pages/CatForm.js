@@ -78,7 +78,7 @@ export const CatForm = () => {
                             <option value="PR">Puerto Rico</option>
                             <option value="UM">United States Minor Outlying Islands</option>
                             <option value="VI">Virgin Islands</option>
-                            <option value="NA">Not a US City</option>
+                            <option value="NA">Not a US State</option>
                         </select>
                     </div>
 
