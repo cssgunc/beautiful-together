@@ -8,10 +8,9 @@ const [notChosen, notChosenFunct] = useState("");
 const [chosen, chosenFunct] = useState("");
 //const chosen = []
 var infoNotClicked = true;
-var testVar = 1;
 
 let availablePets = [fido, spot, max];
-export const PetSelection = () => {
+export const PetSelection = () => {g
     const ncFunction = (ncPetIndex) => {
         //notChosen.push(availablePets[0]);
         notChosenFunct([notChosen, availablePets[ncPetIndex]]);
