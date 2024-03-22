@@ -8,9 +8,11 @@ const [notChosen, notChosenFunct] = useState("");
 const [chosen, chosenFunct] = useState("");
 //const chosen = []
 var infoNotClicked = true;
+//var petArrayNotEmpty = true;
 
 let availablePets = [fido, spot, max];
-export const PetSelection = () => {g
+let trackPets = availablePets;
+export const PetSelection = () => {
     const ncFunction = (ncPetIndex) => {
         //notChosen.push(availablePets[0]);
         notChosenFunct([notChosen, availablePets[ncPetIndex]]);
@@ -26,9 +28,16 @@ export const PetSelection = () => {g
         infoNotClicked = false;
         return infoNotClicked;
     }
+
+    /*const petArrayNotEmptyFunc = () => {
+        if(trackPets.length<0){
+            petArrayNotEmpty = false;
+        }
+        petArrayNotEmpty = true;
+
+    }*/
     // replace the "true" with boolean expression for whether there are more dogs left
-    return true ? (
-        
+    return trackPets.length>0 ? (
         <main className="w-full h-screen bg-background flex justify-center"> {/* side-background for non-mobile users */}
             <div className="h-full w-full max-w-[70vh] bg-white flex flex-col p-4"> {/* actual tinder slide, scaled to viewport height */}
                 <div className="flex justify-between"> {/* bars at top */}
