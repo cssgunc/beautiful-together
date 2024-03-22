@@ -127,7 +127,7 @@ export const DogForm = () => {
                     <InputQuestion label="*Email:" id="email" name="email" type="email" placeholder=" youremail@email.com" required/>
 
                     <div className="flex flex-row justify-end">
-                        <button type="button" form="dogform" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2">Next</button>
+                        <button type="button" form="dogform" onClick={() => setPage(1)} className="flex justify-center items-center pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 bg-passiveGreen rounded-md border-passiveGreen border-4 m-2">Next</button>
                     </div>
                 </div>
 
@@ -228,9 +228,9 @@ export const DogForm = () => {
                     ]} />
 
                     <div className="flex flex-row justify-end">
-                        <button type="button" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2">Previous</button>
+                        <button type="button" onClick={() => setPage(1)}     className="flex justify-center items-center pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 bg-passiveGreen rounded-md border-passiveGreen border-4 m-2">Previous</button>
 
-                        <button className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2" type="submit">Submit</button>
+                        <button className="flex justify-center items-center pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 bg-passiveGreen rounded-md border-passiveGreen border-4 m-2" type="submit">Submit</button>
                     </div>
                 </div>
             </form>
