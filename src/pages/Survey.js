@@ -1,5 +1,5 @@
 import React from 'react';
-import './Survey.css';
+import '../Survey.css';
 
 export const Survey = () => {
     const questions = [
