@@ -67,13 +67,13 @@ export const PetSelection = () => {
 
     // replace the "true" with boolean expression for whether there are more dogs left
     return isTrackPetsNotEmpty ? (
-        <main className="w-full h-screen bg-background flex justify-center"> {/* side-background for non-mobile users */}
-            <div className="h-full w-full max-w-[70vh] bg-white flex flex-col p-4"> {/* actual tinder slide, scaled to viewport height */}
+        <main className="w-full h-screen bg-backgroundGreen bg-opacity-80 flex justify-center"> {/* side-background for non-mobile users */}
+            <div className="h-full w-full max-w-[70vh] bg-background flex flex-col p-4"> {/* actual tinder slide, scaled to viewport height */}
                 <div className="flex justify-between"> {/* bars at top */}
-                    <div className="flex-grow rounded mx-2 h-full p-1 bg-backgroundGreen shadow-sm shadow-backgroundGreen"></div>
-                    <div className="flex-grow rounded mx-2 h-full p-1 bg-backgroundGreen shadow-sm shadow-backgroundGreen"></div>
+                    <div className="flex-grow rounded mx-2 h-full p-1 bg-passiveGreen bg-opacity-80 shadow-sm shadow-backgroundGreen"></div>
+                    <div className="flex-grow rounded mx-2 h-full p-1 bg-passiveGreen bg-opacity-80 shadow-sm shadow-backgroundGreen"></div>
                 </div>
-                <div className="flex-grow bg-backgroundGreen p-3 m-2 rounded-lg shadow-md shadow-backgroundGreen"> {/* pet image */}
+                <div className="flex-grow bg-themeOrange bg-opacity-85 p-3 m-2 rounded-lg shadow-md shadow-backgroundGreen"> {/* pet image */}
                     <img alt="pet_image" className="object-cover w-full h-full rounded-md shadow-sm shadow-black" src={currentPet.image}></img>
                 </div>
                 <div className="mt-auto p-4"> {/* brief pet name & stats */}
@@ -101,8 +101,8 @@ export const PetSelection = () => {
             {/* gray screen over for info screen (hidden initially, replace true with false to 
                 un-hide when info button clicked) */}
             <div className={(!trackInfoClicked ? ("hidden") : ("")) + " absolute flex justify-center p-4 contentpcenter w-full h-full max-w-[70vh] min-h-max bg-gray-700 bg-opacity-40"}> {/* gray screen over for info screen (hidden initially, un-hide when info button clicked) */}
-                <div className="flex flex-col max-w-[60vh] max-h-9/10 bg-white p-4 rounded-sm shadow-xl border-backgroundGreen border-8"> {/* info screen */}
-                    <h1 className="text-white font-bold text-3xl self-center bg-themeOrange px-4 rounded-md shadow-sm mb-2">{currentPet.name}</h1>
+                <div className="flex flex-col max-w-[60vh] max-h-9/10 bg-background p-4 rounded-sm shadow-xl border-backgroundGreen border-8"> {/* info screen */}
+                    <h1 className=" text-background font-bold text-3xl self-center bg-themeOrange px-4 rounded-md shadow-sm mb-2">{currentPet.name}</h1>
                     <p className="flex-grow text-themeOrange">
                     <img alt="pet_breed_icon" className="inline mr-2"></img>
                     <b>{currentPet.breed}</b>
