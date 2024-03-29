@@ -73,7 +73,7 @@ export const PetSelection = () => {
                     <div className="flex-grow rounded mx-2 h-full p-1 bg-passiveGreen bg-opacity-80 shadow-sm shadow-backgroundGreen"></div>
                     <div className="flex-grow rounded mx-2 h-full p-1 bg-passiveGreen bg-opacity-80 shadow-sm shadow-backgroundGreen"></div>
                 </div>
-                <div className="flex-grow bg-themeOrange bg-opacity-85 p-3 m-2 rounded-lg shadow-md shadow-backgroundGreen"> {/* pet image */}
+                <div className="flex-grow bg-themeOrange bg-opacity-85 p-3 m-2 rounded-lg shadow-md shadow-orange-200"> {/* pet image */}
                     <img alt="pet_image" className="object-cover w-full h-full rounded-md shadow-sm shadow-black" src={currentPet.image}></img>
                 </div>
                 <div className="mt-auto p-4"> {/* brief pet name & stats */}
