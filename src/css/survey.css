@@ -1,0 +1,139 @@
+header {
+    font-size: 3em; 
+    text-align: left; 
+    margin-bottom: 20px; 
+    padding-bottom: 30px;
+    font-weight: 600;
+    color: #40A824;
+}
+
+.header-line {
+    line-height: 1; 
+}
+
+.survey-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw; 
+    height: 2400px; 
+    background-color: #F5A336;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
+}
+
+.survey-form {
+    width: 90vw; 
+    max-width: 655px; 
+    padding: 30px;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 18px; 
+}
+
+.question-container {
+    margin-bottom: 40px; 
+}
+
+.question-number {
+    font-weight: bold; 
+}
+
+.question-text {
+    margin-bottom: 10px; 
+}
+
+.question-container select,
+.question-container input[type="radio"],
+.question-container input[type="range"],
+.question-container textarea {
+    margin-top: 15px; 
+    margin-left: 30px;
+    font-weight: normal; 
+}
+
+textarea {
+    border: 1px solid green; 
+    font-size: 16px;
+    padding: 5px; 
+    border-radius: 5px; 
+    outline: none;
+    width: 70%;
+    height: 55px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+textarea:focus {
+    border-color: green; 
+    box-shadow: 0 0 5px green; 
+}
+select {
+    border: 2px solid green; 
+    padding: 5px;
+    width: 60%;
+    border-radius: 5px; 
+    font-size: 16px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+}
+
+select:focus {
+    border-color: green; 
+    box-shadow: 0 0 5px green; 
+}
+
+input[type="radio"] {
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    appearance: none;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    width: 18px; 
+    height: 18px; 
+    border: 1.5px solid green; 
+    border-radius: 4px; 
+    margin-right: 10px; 
+    margin-bottom: -3px;
+    background-color: white; 
+    outline: none; 
+    transition: background-color 0.3s;
+}
+
+input[type="radio"]:checked {
+    background-color: #40A824; 
+}
+
+input[type="radio"]:not(:checked):hover {
+    background-color: #9ce788;
+}
+
+button {
+    padding: 15px 30px; 
+    margin-top: 20px;
+    font-size: 1.1em; 
+    padding-left: 30px;
+    padding-right: 30px;
+    border: none;
+    border-radius: 20px;
+    background-color: #40A824;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 0 auto;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: green;
+}
+
+.select-options.horizontal {
+    display: flex;
+}
+
+.option {
+    margin-right: 20px; 
+}
+
+.option:last-child {
+    margin-right: 0; 
+}

@@ -5,6 +5,8 @@ import {CatForm} from './pages/CatForm'
 import {DogForm} from './pages/DogForm'
 import {SignUp} from './pages/SignUp'
 import {PetSelection} from './pages/PetSelection'
+import {Survey} from './pages/Survey'
+
 
 export const RoutesApp = () => {
     return (
@@ -17,6 +19,7 @@ export const RoutesApp = () => {
                 <Route path="/petselection" element={<PetSelection />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
+                <Route path="/survey" element={<Survey />} />
             </Routes>
         </Router>
     )
