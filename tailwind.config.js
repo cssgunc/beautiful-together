@@ -7,10 +7,14 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          green: '#47AA2C',
+          green: {
+            500: '#23600f',
+            300: '#3fa822'
+          },
+          
           orange: {
-            200: '#F4A23C',
-            400: '#F78E1F',
+            200: '#ef9e41',
+            400: '#f68020',
           },
         },
       },
