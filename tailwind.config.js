@@ -6,16 +6,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: {
-          green: {
-            500: '#23600f',
-            300: '#3fa822'
-          },
-          
-          orange: {
-            200: '#ef9e41',
-            400: '#f68020',
-          },
+        green: {
+          300: '#3fa822',
+          500: '#23600f',
+        },
+        
+        orange: {
+          200: '#ef9e41',
+          400: '#f68020',
         },
       },
     },
