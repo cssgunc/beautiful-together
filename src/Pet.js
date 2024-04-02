@@ -3,6 +3,7 @@ class Pet {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.species = species;
         this.breed = breed;
         this.gender = gender;
         this.age = age;
