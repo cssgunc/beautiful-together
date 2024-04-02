@@ -1,5 +1,5 @@
 import Pet from '../Pet.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 //Example Pets
 const fido = new Pet('1', 'Fido', 'Friendly and playful', 'Dog', 'Labrador', 'Male', 2, 30, 'Black', 'Active', false, true, false, false, true, 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Labrador_on_Quantock_%282175262184%29.jpg/800px-Labrador_on_Quantock_%282175262184%29.jpg');
 const spot = new Pet('2', 'Spot', 'Energetic and friendly', 'Dog', 'Dalmatian', 'Female', 3, 35, 'White with black spots', 'Energetic', true, true, true, false, true, 'https://cdn.britannica.com/47/236047-050-F06BFC5E/Dalmatian-dog.jpg');
@@ -64,14 +64,25 @@ export const PetSelection = () => {
     //         isTrackPetsNotEmpty = false;
     //     }
     //     isTrackPetsNotEmpty = true;
+    
+    function renderDivs() {
+        let bars = [];
+        let pets = availablePets.length;
+        let index = chosenPets.length + rejectedPets.length;
+        for (let i = 0; i < pets; i++) {
+            // bars.push(<div className={"flex-grow rounded mx-2 h-full p-1 bg-" + (i == petIndex ? "white" : "passiveGreen") + " bg-opacity-80 shadow-sm shadow-" + (i == petIndex ? "white" : "backgroundGreen")}></div>);
+            bars.push(<div className={"flex-grow rounded mx-2 h-full p-1 bg-passiveGreen " + (i == index ? "bg-opacity-20" : "") + " shadow-sm shadow-backgroundGreen"}></div>);
+        }
+        return (bars)
+        // return (<div className="flex-grow rounded mx-2 h-full p-1 bg-passiveGreen bg-opacity-80 shadow-sm shadow-backgroundGreen"></div>);
+    }
 
     // replace the "true" with boolean expression for whether there are more dogs left
     return isTrackPetsNotEmpty ? (
         <main className="w-full h-screen bg-backgroundGreen bg-opacity-80 flex justify-center"> {/* side-background for non-mobile users */}
             <div className="h-full w-full max-w-[70vh] bg-background flex flex-col p-4"> {/* actual tinder slide, scaled to viewport height */}
                 <div className="flex justify-between"> {/* bars at top */}
-                    <div className="flex-grow rounded mx-2 h-full p-1 bg-passiveGreen bg-opacity-80 shadow-sm shadow-backgroundGreen"></div>
-                    <div className="flex-grow rounded mx-2 h-full p-1 bg-passiveGreen bg-opacity-80 shadow-sm shadow-backgroundGreen"></div>
+                    {renderDivs()}
                 </div>
                 <div className="flex-grow bg-themeOrange bg-opacity-85 p-3 m-2 rounded-lg shadow-md shadow-orange-200"> {/* pet image */}
                     <img alt="pet_image" className="object-cover w-full h-full rounded-md shadow-sm shadow-black" src={currentPet.image}></img>
