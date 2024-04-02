@@ -25,24 +25,24 @@ export const PetSelection = () => {
 
     function rejectionFunction() {
         setRejectedPets(prevState => [...prevState, currentPet]);
-        setPetIndex(petIndex - 1);
-        if (petIndex >= 0) {
-            setCurrentPet(availablePets[petIndex]);
+        if (petIndex - 1 >= 0) {
+            setCurrentPet(availablePets[petIndex-1]);
         } else {
             setCurrentPet(null);
             setIsTrackPetsNotEmpty(false);
         }
+        setPetIndex(petIndex - 1);
     }
 
     function chosenFunction() {
         setChosenPets(prevState => [...prevState, currentPet]);
-        setPetIndex(petIndex - 1);
-        if (petIndex >= 0) {
-            setCurrentPet(availablePets[petIndex]);
+        if (petIndex - 1 >= 0) {
+            setCurrentPet(availablePets[petIndex-1]);
         } else {
             setCurrentPet(null);
             setIsTrackPetsNotEmpty(false);
         }
+        setPetIndex(petIndex - 1);
     }
 
     // const ncFunction = (ncPetIndex) => {
