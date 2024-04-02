@@ -1,15 +1,50 @@
 "use client";
+import { db } from "../firebase-config.js";
+import { collection, doc, addDoc, updateDoc } from "firebase/firestore";
 import { useState } from "react"; 
 
 
 export const CatForm = () => {
     const [page, setPage] = useState(0);
+
+    const preferenceList = [
+        "cat_age",
+        "cat_breed",
+        "cat_fur_length",
+        "cat_indoor_outdoor",
+        "cat_independency",
+        "cat_nearby_time",
+    ];
+
+    const handleCatForm = async (e) => {
+        e.preventDefault();
+
+        const newCatInfo = {};
+        for (const preference of preferenceList) {
+            newCatInfo[preference] = e.target.elements[preference].value;
+        }
+
+        const userRef = "users";
+        // userDocId is currently editable for testing purposes; update for user authentication. 
+        let userDocId = "";
+        try {
+            if (userDocId === "") {
+                userDocId = await addDoc(collection(db, userRef), newCatInfo);
+                console.log("New User Document ID: " + userDocId);
+            } else {
+                await updateDoc(doc(db, userRef, userDocId), newCatInfo);
+            }
+        } catch (error) {
+            console.error("Error submitting Cat Preference Information", error);
+        }
+    };
+
     return (
         <main className="flex flex-col items-center bg-backgroundGreen w-full h-full w-min-full h-min-full">
 
             <h1 className="text-center text-5xl m-2 my-4 font-serif w-10/12 min-h-min min-w-min p-5 text-white justify-center rounded-sm border-themeOrange border-4 bg-themeOrange">Cat Preference Form<i className="icomoon-e913"></i></h1>
 
-            <form id="catform" className="flex p-8 justify-center m-3 bg-background w-5/6 min-w-min min-h-min rounded-md border- border-stone-200 border-8">
+            <form id="catform" className="flex p-8 justify-center m-3 bg-background w-5/6 min-w-min min-h-min rounded-md border- border-stone-200 border-8" onSubmit={handleCatForm}>
                 <div id="part1" className={page === 0 ? "": "hidden"}>
                     <InputQuestion label="*First Name:" id="f_name" name="first_name" placeholder=" last name" required/>
                     <InputQuestion label="*Last Name:" id="l_name" name="last_name" placeholder=" last name" required/>
@@ -95,27 +130,27 @@ export const CatForm = () => {
                     <InputQuestion label="*Email:" id="email" name="email" type="email" placeholder=" youremail@email.com" required/>
 
                     <div className="flex flex-row justify-end">
-                        <button type="button" form="dogform" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2">Next</button>
+                        <button type="button" form="catform" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2">Next</button>
                     </div>
                 </div>
 
                 <div id="part2" className={page === 1 ? "" : "hidden "}>
-                <ListQuestion label="*What age cat are you interested in adopting?: " id="c_size" selectText="--" required questions={[
-                    {id : "K", name: "Kitten"},
-                    {id : "Y", name: "Young Adult"},
-                    {id : "A", name: "Adult"},
-                    {id : "S", name: "Senior"}
+                <ListQuestion label="*What age cat are you interested in adopting?: " id="c_age" name="cat_age" selectText="--" required questions={[
+                    {id : "K", name: "Kitten", value: "Kitten"},
+                    {id : "Y", name: "Young Adult", value: "Young Adult"},
+                    {id : "A", name: "Adult", value: "Adult"},
+                    {id : "S", name: "Senior", value: "Senior"}
                 ]} />
-                <InputQuestion label="*What breed of cat?: " id="breed" name="cat_breed" required  />
+                <InputQuestion label="*What breed of cat?: " id="c_breed" name="cat_breed" required  />
 
-                <ListQuestion label="*What fur length do you prefer?: " id="fur_length" selectText="--" required questions={[
-                    {id : "S", name: "Shorthair"},
-                    {id : "L", name: "Longhair"}
+                <ListQuestion label="*What fur length do you prefer?: " id="c_fur_length" name="cat_fur_length" selectText="--" required questions={[
+                    {id : "S", name: "Shorthair", value: "Short"},
+                    {id : "L", name: "Longhair", value: "Long"}
                 ]} />
-                <ListQuestion label="Is your home suitable for an indoor, outdoor, or both indoor/outdoor cat?: " id="suitable_home" selectText="--" required questions={[
-                    {id : "I", name: "Indoor"},
-                    {id : "O", name: "Outdoor"},
-                    {id : "B", name: "Both Indoor/Outdoor"}
+                <ListQuestion label="Is your home suitable for an indoor, outdoor, or both indoor/outdoor cat?: " id="c_suitable_home" name="cat_indoor_outdoor" selectText="--" required questions={[
+                    {id : "I", name: "Indoor", value: "Indoor"},
+                    {id : "O", name: "Outdoor", value: "Outdoor"},
+                    {id : "B", name: "Both Indoor/Outdoor", value: "Both"}
                 ]} />
                     <div className="flex flex-row justify-end">
                         <button type="button" onClick={() => setPage(0)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2">Previous</button>
@@ -124,15 +159,15 @@ export const CatForm = () => {
                 </div>
 
                 <div id="part3" className={page === 2 ? "" : "hidden "}>
-                    <ListQuestion label="*My Cat needs to be able to be alone..." id="alone_time" name="cat_independency" selectText="--" required questions={[
-                        {id : "M", name: "More than 9 hours per day."},
-                        {id : "A", name: "Around 4-8 hours per day."},
-                        {id : "L", name: "Less than 4 hours a day."}
+                    <ListQuestion label="*My Cat needs to be able to be alone..." id="c_alone_time" name="cat_independency" selectText="--" required questions={[
+                        {id : "M", name: "More than 9 hours per day.", value: "Over 9 hours"},
+                        {id : "A", name: "Around 4-8 hours per day.", value: "4-8 hours"},
+                        {id : "L", name: "Less than 4 hours a day.", value: "Under 4 hours"}
                     ]} />
-                    <ListQuestion label="*When I am at home, I want my cat to be by my side or in my lap..." id="quality_time" name="cat_time" selectText="--" required questions={[
-                        {id : "L", name: "Little of the time."},
-                        {id : "S", name: "Some of the time."},
-                        {id : "A", name: "All of the time."}
+                    <ListQuestion label="*When I am at home, I want my cat to be by my side or in my lap..." id="c_quality_time" name="cat_nearby_time" selectText="--" required questions={[
+                        {id : "L", name: "Little of the time.", value: "Minimal"},
+                        {id : "S", name: "Some of the time.", value: "Sometimes"},
+                        {id : "A", name: "All of the time.", value: "Always"}
                     ]} />
                     <div className="flex flex-row justify-end">
                         <button type="button" onClick={() => setPage(1)} className="flex flex-col pt-2 pb-2 px-2 font-sans text-center text-white h-10 w-20 align-top bg-passiveGreen rounded-md border-passiveGreen border-4 m-2">Previous</button>
@@ -160,9 +195,9 @@ function ListQuestion({label, name, id, selectText, questions, ...args}) {
         <div className="border-2 p-2 rounded-lg border-white space-y-2">
             {questions.map((question) => (
                 <fieldset id={id} className="space-x-2">
-                    <input className="" type="radio" id={question.val} name={name} {...args} />
+                    <input className="" type="radio" id={id + "-" + question.id} name={name} value={question.value} {...args} />
 
-                    <label className="font-sans text-white text-wrap" for={question.val}>
+                    <label className="font-sans text-white text-wrap" for={id + "-" + question.id}>
                         {question.name}
                     </label>
                 </fieldset>
