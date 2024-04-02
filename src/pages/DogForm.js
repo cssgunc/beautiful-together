@@ -1,4 +1,6 @@
 "use client";
+import { db } from "../firebase-config.js";
+import { collection, doc, addDoc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 
 export const DogForm = () => {
@@ -14,13 +16,48 @@ export const DogForm = () => {
     // Create list of questions for the dogs
 
     const [page, setPage] = useState(0);
+    const preferenceList = [
+        "dog_size",
+        "dog_breed",
+        "dog_training",
+        "dog_walking",
+        "dog_barking",
+        "dog_shedding",
+        "dog_energetic",
+        "dog_grooming",
+        "dog_qualities",
+        "dog_integration"
+    ]
 
+    const handleDogForm = async (e) => {
+        e.preventDefault();
+        
+        const newDogInfo = {}
+        for (const preference of preferenceList) {
+            newDogInfo[preference] = e.target.elements[preference].value
+        }
+
+        const userRef = "users";
+        // userDocId is currently editable for testing purposes; update for user authentication. 
+        let userDocId = "EzZatMdBe5QeaHu93Per";
+        try {
+            if (userDocId === "") {
+                userDocId = await addDoc(collection(db, userRef), newDogInfo);
+                console.log("New User Document ID: " + userDocId);
+            } else {
+                await updateDoc(doc(db, userRef, userDocId), newDogInfo);
+            }
+        } catch (error) {
+            console.error("Error submitting Dog Preference Information", error)
+        }
+    };
+    
     return (
         <main className="flex flex-col items-center bg-backgroundGreen w-full h-full w-min-full h-min-full">
 
             <h1 className="text-center text-5xl m-2 my-4 font-serif w-10/12 min-h-min min-w-min p-5 text-white justify-center rounded-sm border-themeOrange border-4 bg-themeOrange">Dog Preference Form <i className="icomoon-e913"></i></h1>
 
-            <form id="dogform" className="flex p-8 justify-center m-3 bg-background w-5/6 min-w-min min-h-min rounded-md border- border-stone-200 border-8">
+            <form id="dogform" onSubmit={handleDogForm} className="flex p-8 justify-center m-3 bg-background w-5/6 min-w-min min-h-min rounded-md border- border-stone-200 border-8">
                 <div id= "part1" className={page === 0 ? "" : "hidden "}>
 
                     <InputQuestion label="*First Name:" id="f_name" name="first_name" placeholder=" first name" required/>
@@ -144,52 +181,52 @@ export const DogForm = () => {
                      */}
                     
                     <ListQuestion label="*What size dog:" id="d_size" name="dog_size" selectText="Select your preferred size" required questions={[
-                        {id : "S", name : "Small"},
-                        {id : "M", name : "Medium"},
-                        {id : "L", name : "Large"},
-                        {id : "NA", name : "Don't mind"}
+                        {id : "S", name : "Small", value : "Small"},
+                        {id : "M", name : "Medium", value : "Medium"},
+                        {id : "L", name : "Large", value : "Large"},
+                        {id : "NA", name : "Don't mind", value : "N/A"}
                     ]} />
                     
                     <InputQuestion label="*What breed of dog:" id="breed" name="dog_breed" required />
                     
                     <ListQuestion label="*How much are you willing to train your dog:" id="d_train" name="dog_training" selectText="--" required questions={[
-                        {id : "L", name : "Not at all"},
-                        {id : "M", name : "I'd be willing to do basic training"},
-                        {id : "H", name : "I want to train my dog to a high standard"},
-                        {id : "NA", name : "Don't mind"}
+                        {id : "L", name : "Not at all", value : "Unwilling to train"},
+                        {id : "M", name : "I'd be willing to do basic training", value : "Basic Training"},
+                        {id : "H", name : "I want to train my dog to a high standard", value : "High Standard"},
+                        {id : "NA", name : "Don't mind", value : "N/A"}
                     ]} />
                     
                     <ListQuestion label="*How much are you willing to walk your dog every day:" id="d_walk" name="dog_walking" selectText="--" required questions={[
-                        {id : "L", name : "<1 hour a day"},
-                        {id : "M", name : "1-2 hours a day"},
-                        {id : "H", name : ">2 hours a day"},
-                        {id : "NA", name : "Don't mind"}
+                        {id : "L", name : "<1 hour a day", value : "Less than an hour daily"},
+                        {id : "M", name : "1-2 hours a day", value : "1-2 hours daily"},
+                        {id : "H", name : ">2 hours a day", value : "Over 2 hours daily"},
+                        {id : "NA", name : "Don't mind", value : "N/A"}
                     ]} />
                     
                     <ListQuestion label="*How vocal do you want your dog to be:" id="d_bark" name="dog_barking" selectText="--" required questions={[
-                        {id : "L", name : "I prefer quieter dogs"},
-                        {id : "H", name : "I would like a chatty dog"},
-                        {id : "NA", name : "Don't mind"}
+                        {id : "L", name : "I prefer quieter dogs", value : "Quiet"},
+                        {id : "H", name : "I would like a chatty dog", value : "Loud"},
+                        {id : "NA", name : "Don't mind", value : "N/A"}
                     ]} />
                     
                     <ListQuestion label="*How much shedding would you mind your dog doing:" id="d_shed" name="dog_shedding" selectText="--" required questions={[
-                        {id : "L", name : "I want a hypo-allergenic dog"},
-                        {id : "M", name : "I would prefer less shedding"},
-                        {id : "H", name : "I don't mind how much they shed"}
+                        {id : "L", name : "I want a hypo-allergenic dog", value : "Hypo-allergenic"},
+                        {id : "M", name : "I would prefer less shedding", value : "Less shedding"},
+                        {id : "H", name : "I don't mind how much they shed", value : "N/A"}
                     ]} />
                     
                     <ListQuestion label="*How energetic do you want your dog to be:" id="d_energy" name="dog_energetic" selectText="--" required questions={[
-                        {id : "L", name : "I want a calm, cool, collected dog"},
-                        {id : "M", name : "I want a dog with an average amount of energy"},
-                        {id : "H", name : "I want an extremely active dog"},
-                        {id : "NA", name : "Don't mind"}
+                        {id : "L", name : "I want a calm, cool, collected dog", value : "Low"},
+                        {id : "M", name : "I want a dog with an average amount of energy", value : "Medium"},
+                        {id : "H", name : "I want an extremely active dog", value : "High"},
+                        {id : "NA", name : "Don't mind", value : "N/A"}
                     ]} />
                     
-                    <ListQuestion label="*How frequenly would you mind grooming your dog:" id="d_groom" name="dog_grooming" selectText="--" required questions={[
-                        {id : "L", name : "I could groom my dog once a week"},
-                        {id : "M", name : "I can groom my dog a few times a week"},
-                        {id : "H", name : "I have time to groom my dog every day"},
-                        {id : "NA", name : "Don't mind"}
+                    <ListQuestion label="*How frequently would you mind grooming your dog:" id="d_groom" name="dog_grooming" selectText="--" required questions={[
+                        {id : "L", name : "I could groom my dog once a week", value : "Weekly"},
+                        {id : "M", name : "I can groom my dog a few times a week", value : "Multiple times a week"},
+                        {id : "H", name : "I have time to groom my dog every day", value : "Daily"},
+                        {id : "NA", name : "Don't mind", value : "N/A"}
                     ]} />
 
 <div className="flex flex-row justify-end">
@@ -214,17 +251,17 @@ export const DogForm = () => {
                 <div id="part3" className={page === 2 ? "" : "hidden "}>
 
                 <ListQuestion label="*What qualities are you looking for in a canine companion?" id="d_quality" name="dog_qualities" selectText="--" required questions={[
-                        {id : "E", name : "Energetic and adventurous"},
-                        {id : "C", name : "Calm and laid-back"},
-                        {id : "A", name : "Affectionate and cuddly"},
-                        {id : "I", name : "Intelligent and trainable"}
+                        {id : "E", name : "Energetic and adventurous", value : "Energetic, Adventurous"},
+                        {id : "C", name : "Calm and laid-back", value : "Calm, Laid-back"},
+                        {id : "A", name : "Affectionate and cuddly", value : "Affectionate, Cuddly"},
+                        {id : "I", name : "Intelligent and trainable", value : "Intelligent, Trainable"}
                     ]} />
 
                 <ListQuestion label="*How do you envision integrating a dog into your family dynamics or living situation?" id="d_integrate" name="dog_integration" selectText="--" required questions={[
-                        {id : "F", name : "The dog will be a central part of our family activities and routines."},
-                        {id : "O", name : "The dog will have its own space but will be included in family time."},
-                        {id : "C", name : "The dog will primarily be my companion but will interact with family members occasionally."},
-                        {id : "I", name : "The dog will be mostly independent and will have limited interaction with family members."}
+                        {id : "F", name : "The dog will be a central part of our family activities and routines.", value : "Fully Integrated"},
+                        {id : "O", name : "The dog will have its own space but will be included in family time.", value : "Separate but Included"},
+                        {id : "C", name : "The dog will primarily be my companion but will interact with family members occasionally.", value : "Personal Companion"},
+                        {id : "I", name : "The dog will be mostly independent and will have limited interaction with family members.", value : "Mostly Independent"}
                     ]} />
 
                     <div className="flex flex-row justify-end">
@@ -255,9 +292,9 @@ function ListQuestion({label, name, id, selectText, questions, ...args}) {
         <div className="border-2 p-2 rounded-lg border-white space-y-2">
             {questions.map((question) => (
                 <fieldset id={id} className="space-x-2">
-                    <input className="" type="radio" id={question.val} name={name} {...args} />
+                    <input className="" type="radio" id={id + "-" + question.id} name={name} value={question.value} {...args} />
 
-                    <label className="font-sans text-white text-wrap" for={question.val}>
+                    <label className="font-sans text-white text-wrap" for={id + "-" + question.id}>
                         {question.name}
                     </label>
                 </fieldset>
