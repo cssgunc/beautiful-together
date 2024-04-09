@@ -71,9 +71,9 @@ export const PetSelection = () => {
 
     // replace the "true" with boolean expression for whether there are more dogs left
     return isTrackPetsNotEmpty ? (
-        <main className="w-full h-screen bg-backgroundGreen bg-opacity-80 flex justify-center items-center"> {/* side-background for non-mobile users */}
+        <main className="w-full h-screen bg-backgroundGreen bg-opacity-70 flex justify-center items-center shadow-inner"> {/* side-background for non-mobile users */}
             <div className="h-full w-full max-h-fit max-w-[70vh] relative z-0 object-contain"> {/* pet image */}
-                    <img alt="pet_image" className="object-cover min-w-full min-h-full max-h-full" src={currentPet.images[0]}></img>
+                    <img alt="pet_image" className="object-cover min-w-full min-h-full max-h-full shadow-inner" src={currentPet.images[0]}></img>
             
                 <div className="absolute inset-0 h-full w-full max-w-[70vh] bg-transparent flex flex-col z-10 p-4"> {/* actual tinder slide, scaled to viewport height */}
                     <div className="flex justify-between"> {/* bars at top */}
@@ -108,9 +108,13 @@ export const PetSelection = () => {
                 un-hide when info button clicked) */}
             <div className={(!trackInfoClicked ? ("hidden") : ("")) + " absolute flex justify-center p-4 contentpcenter w-full h-full max-w-[70vh] min-h-max bg-gray-700 bg-opacity-40"}> {/* gray screen over for info screen (hidden initially, un-hide when info button clicked) */}
                 <div className="flex flex-col max-w-[60vh] max-h-9/10 w-full bg-white p-4 rounded-xl shadow-xl"> {/* info screen */}
-                    <div className="flex-row">
-                        <p className=" text-themeOrange font-bold text-3xl">Pet Info</p>
-                        <button onClick={() => setTrackInfoClicked(!trackInfoClicked)} className="text-black text-3xl">X</button>
+                    <div className="flex justify-between flex-row min-w-full">
+                        <div>
+                            <t className="flex text-themeOrange font-bold text-3xl">Pet Info</t>
+                        </div>
+                        <div>
+                            <button onClick={() => setTrackInfoClicked(!trackInfoClicked)} className="flex text-black text-3xl">X</button>
+                        </div>
                     </div>
                     <p className='flex-grow'>
                         {currentPet.description}
