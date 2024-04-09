@@ -71,7 +71,7 @@ export const PetSelection = () => {
 
     // replace the "true" with boolean expression for whether there are more dogs left
     return isTrackPetsNotEmpty ? (
-        <main className="w-full h-screen bg-backgroundGreen bg-opacity-70 flex justify-center items-center shadow-inner"> {/* side-background for non-mobile users */}
+        <main className="w-full h-screen bg-gradient-to-br from-backgroundGreen to-themeOrange bg-opacity-70 flex justify-center items-center shadow-inner"> {/* side-background for non-mobile users */}
             <div className="h-full w-full max-h-fit max-w-[70vh] relative z-0 object-contain"> {/* pet image */}
                     <img alt="pet_image" className="object-cover min-w-full min-h-full max-h-full shadow-inner" src={currentPet.images[0]}></img>
             
