@@ -13,9 +13,9 @@ import infoIcon from './icons/info-fill-svgrepo-com.svg'
 import clockIcon from './icons/clock-fill-svgrepo-com.svg'
 
 //Example Pets
-const fido = new Pet('1', 'Fido', 'Friendly and playful', 'Dog', 'Labrador', 'Male', 2, 30, 'Black', 'Active', false, true, false, false, true, 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Labrador_on_Quantock_%282175262184%29.jpg/800px-Labrador_on_Quantock_%282175262184%29.jpg');
-const spot = new Pet('2', 'Spot', 'Energetic and friendly', 'Dog', 'Dalmatian', 'Female', 3, 35, 'White with black spots', 'Energetic', true, true, true, false, true, 'https://cdn.britannica.com/47/236047-050-F06BFC5E/Dalmatian-dog.jpg');
-const max = new Pet('3', 'Max', 'Loyal and friendly', 'Dog', 'Golden Retriever', 'Male', 1, 40, 'Golden', 'Calm', false, true, true, true, true, 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Golden_Retriever_Dukedestiny01_drvd.jpg/640px-Golden_Retriever_Dukedestiny01_drvd.jpg');
+const fido = new Pet('1', 'Fido', 'Friendly and playful', 'Dog', 'Labrador', 'Male', 2, 30, 'Black', 'Active', false, true, false, false, true, ['https://wallpapershome.com/images/pages/pic_v/16641.jpg']);
+const spot = new Pet('2', 'Spot', 'Energetic and friendly', 'Dog', 'Dalmatian', 'Female', 3, 35, 'White with black spots', 'Energetic', true, true, true, false, true, ['https://cdn.britannica.com/47/236047-050-F06BFC5E/Dalmatian-dog.jpg']);
+const max = new Pet('3', 'Max', 'Loyal and friendly', 'Dog', 'Golden Retriever', 'Male', 1, 40, 'Golden', 'Calm', false, true, true, true, true, ['https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Golden_Retriever_Dukedestiny01_drvd.jpg/640px-Golden_Retriever_Dukedestiny01_drvd.jpg']);
 
 //const chosen = []
 
@@ -44,6 +44,7 @@ export const PetSelection = () => {
             setIsTrackPetsNotEmpty(false);
         }
         setPetIndex(petIndex - 1);
+        renderDivs();
     }
 
     function chosenFunction() {
@@ -55,59 +56,38 @@ export const PetSelection = () => {
             setIsTrackPetsNotEmpty(false);
         }
         setPetIndex(petIndex - 1);
+        renderDivs();
     }
-
-    // const ncFunction = (ncPetIndex) => {
-    //     notChosenFunct(prevState => [...prevState, availablePets[ncPetIndex]]);
-    // }
-    
-    // const cFunction = (cPetIndex) => {
-    //     chosenFunct(prevState => [...prevState, availablePets[cPetIndex]]);
-    // }
-
-    // const infoFunction = () => {
-    //     //create variable and change it to true
-    //     infoNotClicked = false;
-    //     return infoNotClicked;
-    // }
-
-    // const trackPetsFunc = () => {
-    //     if(trackPets.length<0){
-    //         isTrackPetsNotEmpty = false;
-    //     }
-    //     isTrackPetsNotEmpty = true;
     
     function renderDivs() {
         let bars = [];
-        let pets = availablePets.length;
-        let index = chosenPets.length + rejectedPets.length;
+        let pets = currentPet.images.length;
+        let index = 0;
         for (let i = 0; i < pets; i++) {
-            // bars.push(<div className={"flex-grow rounded mx-2 h-full p-1 bg-" + (i == petIndex ? "white" : "passiveGreen") + " bg-opacity-80 shadow-sm shadow-" + (i == petIndex ? "white" : "backgroundGreen")}></div>);
-            bars.push(<div className={"flex-grow rounded mx-2 h-full p-1 bg-passiveGreen " + (i == index ? "bg-opacity-20" : "") + " shadow-sm shadow-backgroundGreen"}></div>);
+            bars.push(<div className={"flex-grow rounded mx-2 h-full p-1 bg-white" + (i == index ? " bg-opacity-60" : "") + " shadow-sm"}></div>);
         }
         return (bars)
-        // return (<div className="flex-grow rounded mx-2 h-full p-1 bg-passiveGreen bg-opacity-80 shadow-sm shadow-backgroundGreen"></div>);
     }
 
     // replace the "true" with boolean expression for whether there are more dogs left
     return isTrackPetsNotEmpty ? (
-        <main className="w-full h-screen bg-backgroundGreen bg-opacity-80 flex justify-center"> {/* side-background for non-mobile users */}
-            <div className="h-full w-full max-w-[70vh] bg-background flex flex-col p-4"> {/* actual tinder slide, scaled to viewport height */}
-                <div className="flex justify-between"> {/* bars at top */}
+        <main className="w-full h-screen bg-backgroundGreen bg-opacity-80 flex justify-center items-center"> {/* side-background for non-mobile users */}
+            <div className="h-full w-full max-h-fit max-w-[70vh] relative z-0 object-contain"> {/* pet image */}
+                    <img alt="pet_image" className="object-cover min-w-full min-h-full max-h-full" src={currentPet.images[0]}></img>
+            
+                <div className="absolute inset-0 h-full w-full max-w-[70vh] bg-transparent flex flex-col z-10 p-4"> {/* actual tinder slide, scaled to viewport height */}
+                    <div className="flex justify-between"> {/* bars at top */}
                     {renderDivs()}
-                </div>
-                <div className="flex-grow bg-themeOrange bg-opacity-85 p-3 m-2 rounded-lg shadow-md shadow-orange-200"> {/* pet image */}
-                    <img alt="pet_image" className="object-cover w-full h-full rounded-md shadow-sm shadow-black" src={currentPet.image}></img>
-                </div>
-                <div className="mt-auto p-4"> {/* brief pet name & stats */}
-                    <h1 className="text-themeOrange font-bold text-3xl">{currentPet.name}</h1>
-                    <p className="text-themeOrange">
+                    </div>
+                    <div className="mt-auto p-4"> {/* brief pet name & stats */}
+                        <h1 className="text-white font-bold text-3xl">{currentPet.name}</h1>
+                    <p className="text-white">
                         <img alt="pet_breed_icon" className="inline mr-2 w-6" src={currentPet.species === "Cat" ? catIcon : dogIcon}></img>
                         <b>{currentPet.breed}</b></p>
-                    <p className="text-themeOrange">
+                    <p className="text-white">
                         <img alt="pet_gender_icon" className="inline mr-2 w-6" src={currentPet.gender === "Male" ? maleIcon : femaleIcon}></img>
                         <b>{currentPet.gender}</b></p>
-                    <p className="text-themeOrange">
+                    <p className="text-white">
                         <img alt="pet_age_icon" className="inline mr-2 w-6" src={cakeIcon}></img>
                         <b>{currentPet.age}</b></p>
                 </div>
@@ -122,46 +102,49 @@ export const PetSelection = () => {
                         <img alt="heartbutton" className="inline-block w-20" src={plusIcon}></img>
                     </button> 
                 </div>
+                </div>
             </div>
             {/* gray screen over for info screen (hidden initially, replace true with false to 
                 un-hide when info button clicked) */}
             <div className={(!trackInfoClicked ? ("hidden") : ("")) + " absolute flex justify-center p-4 contentpcenter w-full h-full max-w-[70vh] min-h-max bg-gray-700 bg-opacity-40"}> {/* gray screen over for info screen (hidden initially, un-hide when info button clicked) */}
-                <div className="flex flex-col max-w-[60vh] max-h-9/10 w-full bg-background p-4 rounded-sm shadow-xl border-backgroundGreen border-8"> {/* info screen */}
-                    <h1 className=" text-background font-bold text-3xl self-center bg-themeOrange px-4 rounded-md shadow-sm mb-2">{currentPet.name}</h1>
-                    <p className="flex-grow text-themeOrange">
+                <div className="flex flex-col max-w-[60vh] max-h-9/10 w-full bg-white p-4 rounded-xl shadow-xl"> {/* info screen */}
+                    <div className="flex-row">
+                        <p className=" text-themeOrange font-bold text-3xl">Pet Info</p>
+                        <button onClick={() => setTrackInfoClicked(!trackInfoClicked)} className="text-black text-3xl">X</button>
+                    </div>
+                    <p className='flex-grow'>
+                        {currentPet.description}
+                    </p>
+                    <p className="flex-grow">
                         <img alt="pet_breed_icon" className="inline mr-2 w-6" src={currentPet.species === "Cat" ? catIcon : dogIcon}></img>
-                    <b>{currentPet.breed}</b>
+                    {currentPet.breed}
                     </p>
-                    <p className="flex-grow text-themeOrange">
+                    <p className="flex-grow">
                         <img alt="pet_gender_icon" className="inline mr-2 w-6" src={currentPet.gender === "Male" ? maleIcon : femaleIcon}></img>
-                        <b>{currentPet.gender}</b>
+                        {currentPet.gender}
                         </p>
-                    <p className="flex-grow text-themeOrange">
+                    <p className="flex-grow">
                         <img alt="pet_age_icon" className="inline mr-2 w-6" src={cakeIcon}></img>
-                        <b>{currentPet.age}</b>
+                        {currentPet.age}
                         </p>
-                    <p className='flex-grow text-themeOrange'>
-                        <b>{currentPet.description}</b>
+                    <p className='flex-grow'>
+                        {currentPet.personality}
                     </p>
-                    <p className='flex-grow text-themeOrange'>
-                        <b>{currentPet.personality}</b>
+                    <p className='flex-grow'>
+                        {currentPet.kidCompatible ? 'Kid Compatible' : 'Not Kid Compatible'}
                     </p>
-                    <p className='flex-grow text-themeOrange'>
-                        <b>{currentPet.kidCompatible ? 'Kid Compatible' : 'Not Kid Compatible'}</b>
+                    <p className='flex-grow'>
+                        {currentPet.dogCompatible ? 'Dog Compatible' : 'Not Dog Compatible'}
                     </p>
-                    <p className='flex-grow text-themeOrange'>
-                        <b>{currentPet.dogCompatible ? 'Dog Compatible' : 'Not Dog Compatible'}</b>
+                    <p className='flex-grow'>
+                        {currentPet.catCompatible ? 'Cat Compatible' : 'Not Cat Compatible'}
                     </p>
-                    <p className='flex-grow text-themeOrange'>
-                        <b>{currentPet.catCompatible ? 'Cat Compatible' : 'Not Cat Compatible'}</b>
+                    <p className='flex-grow'>
+                        {currentPet.livestockCompatible ? 'Livestock Compatible' : 'Not Livestock Compatible'}
                     </p>
-                    <p className='flex-grow text-themeOrange'>
-                        <b>{currentPet.livestockCompatible ? 'Livestock Compatible' : 'Not Livestock Compatible'}</b>
+                    <p className='flex-grow'>
+                        {currentPet.trained ? 'Trained' : 'Not Formally Trained'}
                     </p>
-                    <p className='flex-grow text-themeOrange'>
-                        <b>{currentPet.trained ? 'Trained' : 'Not Formally Trained'}</b>
-                    </p>
-                    <button onClick={() => setTrackInfoClicked(!trackInfoClicked)} className="bg-themeOrange text-white rounded-md p-2 shadow-md">Close</button>
                 </div>
             </div>
         </main>
