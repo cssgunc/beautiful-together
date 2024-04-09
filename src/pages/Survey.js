@@ -1,11 +1,16 @@
 import React from 'react';
 import '../css/survey.css';
 import { db } from '../firebase-config.js';
-import { addDoc, collection, doc } from 'firebase/firestore';
+import { addDoc, collection, doc, setDoc, updateDoc } from 'firebase/firestore';
+import { getAuth } from "firebase/auth";
+
 
 // I just made this file like a copy of responseEmail
 // Based on how it should work, I am not confident in whether or not this implementation is on the correct track
 
+
+const auth = getAuth();
+const user = auth.currentUser;
 
 async function addPetSurvey(ageRange, kids, livingConditions, activity, num_of_pets,
      pet_preference, travel, other_pets, follow_up, time_for_pet,
@@ -34,6 +39,10 @@ async function addPetSurvey(ageRange, kids, livingConditions, activity, num_of_p
 
     try {
         const docRef = await addDoc(collection(db, "pet_Survey"), petSurveyData);
+        console.log(sessionStorage.getItem('userUID'));
+
+        await updateDoc(doc(db, "users", sessionStorage.getItem('userUID')), { pet_survey_id: docRef.id });
+
         console.log('Document written with ID: ', docRef.id);
     } catch (error) {
         console.error('Error adding document: ', error);
@@ -168,6 +177,7 @@ export const Survey = () => {
                 responses.yardFence,
                 responses.additionalInformation
             )
+            alert("Thank you for completing the pet survey");
     };
 
     const handleSliderChange = (questionId, value) => {

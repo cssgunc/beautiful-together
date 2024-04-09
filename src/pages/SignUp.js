@@ -62,7 +62,10 @@ export const SignUp = () => {
             };
 
             // Store additional user information in Firestore
-            await createFirebaseUser(newUser.f_name, newUser.l_name, newUser.addr, newUser.countr, newUser.cit, newUser.sta, newUser.z_code, newUser.h_phone, newUser.c_phone, newUser.email_addr);
+            const tempUser = await createFirebaseUser(newUser.f_name, newUser.l_name, newUser.addr, newUser.countr, newUser.cit, newUser.sta, newUser.z_code, newUser.h_phone, newUser.c_phone, newUser.email_addr);
+
+
+            sessionStorage.setItem('userUID', tempUser);
 
             alert("User created successfully!");
         } catch (error) {
