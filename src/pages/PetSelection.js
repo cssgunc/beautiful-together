@@ -72,7 +72,7 @@ export const PetSelection = () => {
     // replace the "true" with boolean expression for whether there are more dogs left
     return isTrackPetsNotEmpty ? (
         <main className="w-full h-screen bg-gradient-to-br from-backgroundGreen to-themeOrange bg-opacity-70 flex justify-center items-center shadow-inner"> {/* side-background for non-mobile users */}
-            <div className="h-full w-full max-h-fit max-w-[70vh] relative z-0 object-contain"> {/* pet image */}
+            <div className="h-full w-full max-h-fit max-w-[70vh] relative z-0 object-contain shadow-2xl shadow-backgroundGreen/80"> {/* pet image */}
                     <img alt="pet_image" className="object-cover min-w-full min-h-full max-h-full shadow-inner" src={currentPet.images[0]}></img>
             
                 <div className="absolute inset-0 h-full w-full max-w-[70vh] bg-transparent flex flex-col z-10 p-4"> {/* actual tinder slide, scaled to viewport height */}
