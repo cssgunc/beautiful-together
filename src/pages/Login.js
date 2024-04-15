@@ -1,5 +1,5 @@
 import { db } from "../firebase-config.js";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc } from "/firebase/firestore";
 import "../css/login.css";
 
 
@@ -45,5 +45,34 @@ export const Login = () => {
             </div>
         </div>
         
+    );
+}
+
+// const signupForm = document.querySelector('#signup-form');
+// signupForm.addEventListener('sumbit', (e) => {
+//     e.preventDefault();
+
+//     const email = signupForm['signup-email'].value;
+//     const password = signupForm['signup-password'].value;
+
+//     auth.createUserWithEmailAndPassword(email, password).then(cred => {
+//         const modal = document.querySelector('#modal-signup');
+//         M.Modal.getInstance(modal).close();
+//         signupForm.requestFullscreen();
+//     });
+// });
+
+const Logout = () => {
+    const performLogout = async () => {
+        try {
+            await auth.signOut().then(()=> {
+                console.log('Logged out successfully.')
+            })
+        } catch {
+            console.error("Logout is unsuccessful. Error.")
+        }
+    }
+    return (
+        <button onClick={performLogout}>Logout</button>
     );
 }
