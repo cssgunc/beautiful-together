@@ -6,6 +6,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export const SignUp = () => {
     const userRef = "users";
+    
     const createFirebaseUser = async (f_name, l_name, addr, countr, cit, sta, z_code, h_phone, c_phone, email_addr) => {
         const newUser = {
             first_name: f_name, 
@@ -24,8 +25,6 @@ export const SignUp = () => {
     };
 
     const auth = getAuth(); 
-    //const userRef = "users";
-
 
     // Handle form submission
     const handleSignUp = async (e) => {
