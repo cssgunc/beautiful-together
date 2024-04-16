@@ -58,7 +58,7 @@ export const Login = () => {
           ></input>
         </div>
         <div className="button-container">
-          <button type="submit" onClick={SignIn}>
+          <button type="submit" className="login-button" onClick={SignIn}>
             Log In
           </button>
         </div>
