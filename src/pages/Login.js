@@ -1,34 +1,71 @@
-import { db } from "../firebase-config.js";
-import { collection, addDoc } from "firebase/firestore";
+import "../css/login.css";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import React, { useState } from "react";
+
 export const Login = () => {
-    const userRef = "users";
-    const createFirebaseUser = async (f_name, l_name, addr, countr, cit, sta, z_code, h_phone, c_phone, email_addr) => {
-        const newUser = {
-            first_name: f_name, 
-            last_name: l_name, 
-            address: addr, 
-            country: countr, 
-            city: cit, 
-            state: sta, 
-            zip_code: z_code, 
-            home_phone: h_phone, 
-            cell_phone: c_phone, 
-            email: email_addr
-        };
-        const newUserRef = await addDoc(collection(db, userRef), newUser);
-        return newUserRef.id;
-    };
+  const auth = getAuth();
+  // define email and password fields bound to html input fields
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    return (
-        <div>
-            <header>Welcome to Beautiful Together</header>
-            <p>Learn more about Beautiful Together <a href='https://beautifultogethersanctuary.com/'>here</a></p>
-            <p>Learn the basics of our stack</p>
+  // define sign in method bound to html submit button
+  const SignIn = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential);
+        // signed in
+        // TODO: Redirect to home page
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log(typeof error);
+        // if Error (auth/user-not-found), user doesn't exist
+      });
+  };
 
-            <li><a href="https://www.youtube.com/watch?v=vAoB4VbhRzM">Firebase</a></li>
-            <li><a href="https://www.youtube.com/watch?v=Tn6-PIqc4UM">React</a></li>
-            <li><a href="https://www.youtube.com/watch?v=Tn6-PIqc4UM">React</a></li>
-            <li><a href="https://youtu.be/mr15Xzb1Ook?si=5sDVCpSIBFxwa7UY">TailwindCSS</a></li>
+  const Logout = async (e) => {
+    e.preventDefault();
+    try {
+      await signOut(auth);
+      console.log('Logged out successfully.');
+      // TODO: Redirect to login page or update UI to reflect logged out state
+    } catch (error) {
+      console.error("Logout is unsuccessful. Error:", error);
+    }
+  };
+
+  return (
+    <div className="login-container">
+      <h2>Login</h2>
+      <form>
+        <div className="input-group">
+          <label htmlFor="username">Username</label>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
         </div>
-    );
-}
+        <div className="input-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
+        </div>
+        <div className="button-container">
+          <button type="submit" onClick={SignIn}>
+            Log In
+          </button>
+        </div>
+      </form>
+      <div className="create-account">
+        Don't have an account? <a href="/signup">Create Account</a>
+      </div>
+    </div>
+  );
+};
