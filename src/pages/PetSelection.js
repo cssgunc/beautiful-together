@@ -11,10 +11,11 @@ import plusIcon from './icons/plus-circle-fill-svgrepo-com.svg'
 import minusIcon from './icons/minus-circle-fill-svgrepo-com.svg'
 import infoIcon from './icons/info-fill-svgrepo-com.svg'
 import clockIcon from './icons/clock-fill-svgrepo-com.svg'
+import { render } from '@testing-library/react';
 
 //Example Pets
 const fido = new Pet('1', 'Fido', 'Friendly and playful', 'Dog', 'Labrador', 'Male', 2, 30, 'Black', 'Active', false, true, false, false, true, ['https://wallpapershome.com/images/pages/pic_v/16641.jpg']);
-const spot = new Pet('2', 'Spot', 'Energetic and friendly', 'Dog', 'Dalmatian', 'Female', 3, 35, 'White with black spots', 'Energetic', true, true, true, false, true, ['https://cdn.britannica.com/47/236047-050-F06BFC5E/Dalmatian-dog.jpg']);
+const spot = new Pet('2', 'Spot', 'Energetic and friendly', 'Dog', 'Dalmatian', 'Female', 3, 35, 'White with black spots', 'Energetic', true, true, true, false, true, ['https://cdn.britannica.com/47/236047-050-F06BFC5E/Dalmatian-dog.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Golden_Retriever_Dukedestiny01_drvd.jpg/640px-Golden_Retriever_Dukedestiny01_drvd.jpg', 'https://wallpapershome.com/images/pages/pic_v/16641.jpg']);
 const max = new Pet('3', 'Max', 'Loyal and friendly', 'Dog', 'Golden Retriever', 'Male', 1, 40, 'Golden', 'Calm', false, true, true, true, true, ['https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Golden_Retriever_Dukedestiny01_drvd.jpg/640px-Golden_Retriever_Dukedestiny01_drvd.jpg']);
 
 //const chosen = []
@@ -26,6 +27,7 @@ export const PetSelection = () => {
     
     const[trackInfoClicked, setTrackInfoClicked] = useState(false);
     const[isTrackPetsNotEmpty, setIsTrackPetsNotEmpty] = useState(true);
+    const[currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
 
     const[availablePets, setAvailablePets] = useState([fido, spot, max]);
     const[petIndex, setPetIndex] = useState(availablePets.length - 1);
@@ -35,16 +37,16 @@ export const PetSelection = () => {
     const[rejectedPets, setRejectedPets] = useState([]);
 
 
+
     function rejectionFunction() {
         setRejectedPets(prevState => [...prevState, currentPet]);
         if (petIndex - 1 >= 0) {
             setCurrentPet(availablePets[petIndex-1]);
         } else {
-            setCurrentPet(null);
             setIsTrackPetsNotEmpty(false);
         }
+        setCurrentPhotoIndex(0);
         setPetIndex(petIndex - 1);
-        renderDivs();
     }
 
     function chosenFunction() {
@@ -52,35 +54,54 @@ export const PetSelection = () => {
         if (petIndex - 1 >= 0) {
             setCurrentPet(availablePets[petIndex-1]);
         } else {
-            setCurrentPet(null);
             setIsTrackPetsNotEmpty(false);
         }
         setPetIndex(petIndex - 1);
-        renderDivs();
+        setCurrentPhotoIndex(0);
     }
     
-    function renderDivs() {
+    function renderDivs(index = 0) {
         let bars = [];
         let pets = currentPet.images.length;
-        let index = 0;
         for (let i = 0; i < pets; i++) {
-            bars.push(<div className={"flex-grow rounded mx-2 h-full p-1 bg-white" + (i == index ? " bg-opacity-60" : "") + " shadow-sm"}></div>);
+            bars.push(<div className={"flex-grow rounded mx-2 h-full p-1 bg-white" + (i === index ? " bg-opacity-100" : " bg-opacity-60") + " shadow-sm"}></div>);
         }
         return (bars)
     }
+
+    // For making the transition between the photos make sure to use the renderDivs function with the index you are changing to
+
+    function movePhotoLeft() {
+        if (currentPhotoIndex  > 0) {
+            setCurrentPhotoIndex(currentPhotoIndex - 1);
+        }
+    }
+
+    function movePhotoRight() {
+        if (currentPhotoIndex < currentPet.images.length - 1) {
+            setCurrentPhotoIndex(currentPhotoIndex + 1);
+        }
+    }
+        
+
 
     // replace the "true" with boolean expression for whether there are more dogs left
     return isTrackPetsNotEmpty ? (
         <main className="w-full h-screen bg-gradient-to-br from-backgroundGreen to-themeOrange bg-opacity-70 flex justify-center items-center shadow-inner"> {/* side-background for non-mobile users */}
             <div className="h-full w-full max-h-fit max-w-[70vh] relative z-0 object-contain shadow-2xl shadow-backgroundGreen/80"> {/* pet image */}
-                    <img alt="pet_image" className="object-cover min-w-full min-h-full max-h-full shadow-inner" src={currentPet.images[0]}></img>
-            
-                <div className="absolute inset-0 h-full w-full max-w-[70vh] bg-transparent flex flex-col z-10 p-4"> {/* actual tinder slide, scaled to viewport height */}
+                    <img alt="pet_image" className="object-cover min-w-full min-h-full max-h-full shadow-inner z-10" src={currentPet.images[currentPhotoIndex]}></img>
+    
+
+                <div className="absolute inset-0 h-full w-full max-w-[70vh] bg-transparent flex flex-col z-50 p-4"> {/* actual tinder slide, scaled to viewport height */}
                     <div className="flex justify-between"> {/* bars at top */}
-                    {renderDivs()}
+                    {renderDivs(currentPhotoIndex)}
                     </div>
                     <div className="mt-auto p-4"> {/* brief pet name & stats */}
                         <h1 className="text-white font-bold text-3xl">{currentPet.name}</h1>
+                    <div className='flex flex-row absolute inset-0 justify-between align-middle h-full w-full'>
+                        <button onClick={() => movePhotoLeft()} className="bg-transparent hover:bg-gradient-to-l from-transparent to-white/15 h-full w-12 z-20" type='button'></button>
+                        <button onClick={() => movePhotoRight()} className="bg-transparent hover:bg-gradient-to-r from-transparent to-white/15 h-full w-12 z-20" type='button'></button>
+                    </div>
                     <p className="text-white">
                         <img alt="pet_breed_icon" className="inline mr-2 w-6" src={currentPet.species === "Cat" ? catIcon : dogIcon}></img>
                         <b>{currentPet.breed}</b></p>
@@ -92,13 +113,13 @@ export const PetSelection = () => {
                         <b>{currentPet.age}</b></p>
                 </div>
                 <div className="flex justify-between p-4 pt-0"> {/* container for bottom-row buttons */}
-                    <button onClick={rejectionFunction} type="button">
-                        <img alt="xbutton" className="inline-block w-20" src={minusIcon}></img>
+                    <button onClick={() => rejectionFunction()} type="button" className='z-50'>
+                        <img alt="xbutton" className="inline-block w-20 border-white" src={minusIcon}></img>
                     </button>
-                    <button onClick={() => setTrackInfoClicked(!trackInfoClicked)}>
+                    <button onClick={() => setTrackInfoClicked(!trackInfoClicked)} className='z-50'>
                         <img alt="infobutton" className="inline-block w-10" src={infoIcon}></img>
                     </button>
-                    <button onClick={() => chosenFunction()} type="button">
+                    <button onClick={() => chosenFunction()} type="button" className='z-50'>
                         <img alt="heartbutton" className="inline-block w-20" src={plusIcon}></img>
                     </button> 
                 </div>
