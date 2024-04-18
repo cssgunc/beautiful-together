@@ -5,6 +5,7 @@ import {CatForm} from './pages/CatForm'
 import {DogForm} from './pages/DogForm'
 import {PetSelection} from './pages/PetSelection'
 import Home from './pages/Home'
+import PreLogin from './pages/PreLogin'
 
 export const RoutesApp = () => {
     return (
@@ -16,6 +17,7 @@ export const RoutesApp = () => {
                 <Route path="/dogform" element={<DogForm />} />
                 <Route path="/catform" element={<CatForm />} />
                 <Route path="/petselection" element={<PetSelection />} />
+                <Route path= "/prelogin" element ={<PreLogin />} />
             </Routes>
         </Router>
     )
