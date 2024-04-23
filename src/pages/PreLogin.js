@@ -7,7 +7,7 @@ export const PreLogin = () => {
     return (
         <div className="flex flex-col items-center justify-between m-5 gap-5 min-h-screen">
             <div classname="">
-                <h1 className="text-black text-4xl font-bold">Welcome to</h1>
+                <h1 className="text-black text-4xl font-inika">Welcome to</h1>
                 <img className="max-h-24" src="logo.png" alt="logo"/>
             </div>
             <div className="flex flex-col shadow-lg w-full">
