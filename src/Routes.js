@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import {Home} from './pages/Home'
 import {Login} from './pages/Login'
 import {PetForm} from './pages/PetForm'
 import {CatForm} from './pages/CatForm'
 import {DogForm} from './pages/DogForm'
 import {PetSelection} from './pages/PetSelection'
-import {Home} from './pages/Home'
 import {PreLogin} from './pages/PreLogin'
 
 export const RoutesApp = () => {
