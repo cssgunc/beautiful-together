@@ -9,17 +9,19 @@
 "use client";
 import { useState } from "react";
 
-const shoppingCartPets = [];
-const selectedPets = [];
-
-let checkoutPage = false;
-
 export const PetConfirmation = () => {
+    
+    const shoppingCartPets = [];
+    const selectedPets = [];
+
+    let checkoutPage = false;
+    
     return !checkoutPage ? (
         <main className="w-full h-screen bg-background flex justify-center">
             <div>
                 <img></img>
                 <div>
+                    pet boxes
                     {shoppingCartPets.map((pet) => {
                         <PetBox img={pet.image}/>
                     })}
@@ -32,6 +34,7 @@ export const PetConfirmation = () => {
     ) : (
         <div>
             {/* Have the pet checkout page here */}
+            pet checkout page
         </div>
     );
 }
