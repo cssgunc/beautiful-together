@@ -5,7 +5,7 @@ export const PreLogin = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="flex flex-col items-center m-5 gap-5">
+        <div className="flex flex-col items-center justify-between m-5 gap-5 min-h-screen">
             <div classname="">
                 <h1 className="text-black text-4xl font-bold">Welcome to</h1>
                 <img className="max-h-24" src="logo.png" alt="logo"/>
@@ -19,9 +19,10 @@ export const PreLogin = () => {
                     </div>
                 </div>
                 <div className="p-7 w-full">
-                    <img className="max-h-60 w-full object-contain" src="dog.png" alt="dog"/>
+                    <img className="max-h-60 h-full w-full object-contain" src="dog.png" alt="dog"/>
                 </div>
             </div>
+<<<<<<< HEAD
             <div className="flex flex-col text-lg gap-3 w-full items-center">
                 <div className="text-xl, font-bold">Are you a...</div>
                 <button onClick={() => navigate('/')} className="flex flex-row align-center justify-center gap-2 bg-green-300 text-white rounded p-3 font-bold shadow-md w-full">
@@ -35,6 +36,22 @@ export const PreLogin = () => {
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.83334 14H22.1667M14 5.83333V22.1667" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
+=======
+            <div className="flex flex-col text-center text-lg gap-3 w-full mb-10">
+                <div className="text-xl font-bold">Are you a...</div>
+                <button onClick={() => navigate('/login')} className="flex items-center justify-center gap-5 bg-green-300 text-white rounded px-6 py-3 font-bold shadow-md w-full">
+                    Existing User
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
+                    <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                </svg>
+                </button>
+                <button onClick={() => navigate('/signup')} className="flex flex-row items-center justify-center gap-2 bg-orange-400 text-white rounded px-6 py-3 font-bold shadow-md w-full">
+                    New User
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                </svg>
+>>>>>>> 5e2215a (added images, fixed button width)
                 </button>
             </div>
         </div>
