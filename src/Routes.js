@@ -4,8 +4,8 @@ import {PetForm} from './pages/PetForm'
 import {CatForm} from './pages/CatForm'
 import {DogForm} from './pages/DogForm'
 import {PetSelection} from './pages/PetSelection'
-import Home from './pages/Home'
-import PreLogin from './pages/PreLogin'
+import {Home} from './pages/Home'
+import {PreLogin} from './pages/PreLogin'
 
 export const RoutesApp = () => {
     return (
