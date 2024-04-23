@@ -7,64 +7,143 @@
 */
 
 import db from './firebase-config';
-import { getDocs } from 'firebase/firestore';
+import { getDocs, collection, query, where } from 'firebase/firestore';
 
-var docs; // Variable to hold all documents from one of the collections - cats or dogs
-var headers; // Array to hold all headers that you can filter by
-var values; // Map to hold all possible values given a header
+var filtered_docs;
+var cats_docs; // Variables to hold all documents from one of the collections - cats or dogs
+var dogs_docs;
+var cats_headers; // Arrays to hold all headers that you can filter by
+var dogs_headers;
+var cats_values; // Maps to hold all possible values given a header
+var dogs_values;
 
-// Call this on an array of filters created using createFilter() to get filtered data
-function filterData(filters) {
-  return this.docs.filter(item =>
-    filters.every(filter => filter(item))
-  );
+// Some example filters that may be commonly used
+// Note that headers for cats are capitalized, but headers for dogs are not
+const availableDogsFilter = createFilter("status", "==", "Available");
+const availableCatsFilter = createFilter("Status", "==", "Available")
+const trainedDogsFilter = createFilter("trained", "==", "I'm Trained");
+const trainedCatsFilter = createFilter("Trained", "==", "I'm Litterbox Trained");
+
+// age can be "Baby", "Kitten"/"Puppy", "Youth", or "Adult"
+function ageDogsFilter(age) {
+  return createFilter("age", "==", age);
+}
+function ageCatsFilter(age) {
+  return createFilter("Age", "==", age);
 }
 
-// Column should be one of the headers
-// Comparator should be '<', '==', '>', or similar
-// Value should be a value from the headers
-function createFilter(header, comparator, value) {
-  if (header in headers) {
-    if (value in values.get(header) ) {
-      return ( item => item.where(column, comparator, value).get() );
-    }
-  }
-  else {
-    console.log("Invalid header or value");
-    return ( item => item );
-  }
+// call this function first to populate headers, values, and docs fields
+async function initData() {
+  getDocs(query(collection(db, "dogs"))).then(querySnapshot => {
+    this.dogs_docs = [];
+    querySnapshot.forEach(doc => {
+      this.dogs_docs.push(doc.data());
+    });
+
+    this.dogs_headers = getHeaders(this.dogs_docs);
+    this.dogs_values = new Map();
+    
+    this.dogs_headers.forEach(header => {
+      this.dogs_values.set(header, this.getValuesFromHeader(this.dogs_docs, header));
+    });
+  })
+  .catch(error => {
+    console.error("Error fetching dog documents: ", error);
+  });
+  getDocs(query(collection(db, "cats"))).then(querySnapshot => {
+    this.cats_docs = [];
+    querySnapshot.forEach(doc => {
+      this.cats_docs.push(doc.data());
+    });
+
+    this.cats_headers = getHeaders(this.cats_docs);
+    this.cats_values = new Map();
+    
+    this.cats_headers.forEach(header => {
+      this.cats_values.set(header, this.getValuesFromHeader(this.cats_docs, header));
+    });
+  })
+  .catch(error => {
+    console.error("Error fetching cat documents: ", error);
+  });
 }
 
-// call this with either "cats" or "dogs" to set docs, header, and values fields
-async function fetchData(type) {
+// call this with either "cats" or "dogs" to set docs, header, and values fields,
+// and an array of filters each created by a call to createFilter()
+async function fetchData(type, filters) {
   switch(type) {
     case "cats":
       var q = query(collection(db, "cats"));
-      _fetchData(q);
       break;
     case "dogs":
       var q = query(collection(db, "dogs"));
-      _fetchData(q);
       break;
+  }
+  filters.forEach( filter => {
+    q = query(q, where(filter.field, filter.operator, filter.value));
+  });
+  _fetchData(q).then(() => {
+    return this.filtered_docs;
+  });
+}
+
+// Column should be one of the headers
+// Operator should be '<', '==', '>', "!=", "in", "not-in", or other valid operators defined by Firestore
+// Value should be a value from the headers
+function createFilter(header, operator, value) {
+  if (header in headers && value in values.get(header)) {
+    return  { field: 'header', 'operator': operator, 'value': value };
+  }
+  else {
+    console.log("Invalid header or value");
+    return null;
   }
 }
 
 async function _fetchData(q) {
   getDocs(q).then(querySnapshot => {
-    this.docs = [];
+    this.filtered_docs = [];
     querySnapshot.forEach(doc => {
-      this.docs.push(doc.data());
-    });
-
-    this.headers = getHeaders(this.docs);
-    this.values = new Map();
-    
-    this.headers.forEach(header => {
-      this.values.set(header, this.getValuesFromHeader(this.docs, header));
+      this.filtered_docs.push(doc.data());
     });
   })
   .catch(error => {
     console.error("Error fetching documents: ", error);
+  });
+}
+
+async function initData() {
+  getDocs(query(collection(db, "dogs"))).then(querySnapshot => {
+    this.dogs_docs = [];
+    querySnapshot.forEach(doc => {
+      this.dogs_docs.push(doc.data());
+    });
+
+    this.dogs_headers = getHeaders(this.dogs_docs);
+    this.dogs_values = new Map();
+    
+    this.dogs_headers.forEach(header => {
+      this.dogs_values.set(header, this.getValuesFromHeader(this.dogs_docs, header));
+    });
+  })
+  .catch(error => {
+    console.error("Error fetching dog documents: ", error);
+  });
+  getDocs(query(collection(db, "cats"))).then(querySnapshot => {
+    this.cats_docs = [];
+    querySnapshot.forEach(doc => {
+      this.cats_docs.push(doc.data());
+    });
+
+    this.cats_headers = getHeaders(this.cats_docs);
+    this.cats_values = new Map();
+    
+    this.cats_headers.forEach(header => {
+      this.cats_values.set(header, this.getValuesFromHeader(this.cats_docs, header));
+    });
+  })
+  .catch(error => {
+    console.error("Error fetching cat documents: ", error);
   });
 }
 
@@ -81,4 +160,21 @@ function getHeaders(docs) {
 
 function getValuesFromHeader(docs, header) {
   return new Set(docs.map(doc => doc[header]).filter(value => value !== undefined) );
+}
+
+export {
+  dogs_docs,
+  cats_docs,
+  dogs_headers,
+  cats_headers,
+  dogs_values,
+  cats_values,
+  availableCatsFilter,
+  availableDogsFilter,
+  trainedCatsFilter,
+  trainedDogsFilter,
+  ageCatsFilter,
+  ageDogsFilter,
+  fetchData,
+  createFilter,
 }
