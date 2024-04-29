@@ -1,9 +1,12 @@
 import "../css/login.css";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 export const Login = () => {
   const auth = getAuth();
+  const navigate = useNavigate();
   // define email and password fields bound to html input fields
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,6 +19,7 @@ export const Login = () => {
         console.log(userCredential);
         // signed in
         // TODO: Redirect to home page
+        navigate("/petselection");
       })
       .catch((error) => {
         console.log(error);
