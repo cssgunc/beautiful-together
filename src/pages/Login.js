@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-export const Login = () => {
+export const Login = (props) => {
   const auth = getAuth();
   const navigate = useNavigate();
   // define email and password fields bound to html input fields

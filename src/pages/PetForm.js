@@ -11,7 +11,7 @@ import {useNavigate} from 'react-router-dom';
  * 3) Implement rest of UI
  *
  */
-export const PetForm = () => {
+export const PetForm = (props) => {
 
     const navigate = useNavigate();
   

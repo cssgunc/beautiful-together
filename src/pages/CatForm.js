@@ -4,7 +4,7 @@ import { collection, doc, addDoc, updateDoc } from "firebase/firestore";
 import { useState } from "react"; 
 
 
-export const CatForm = () => {
+export const CatForm = (props) => {
     const [page, setPage] = useState(0);
 
     const preferenceList = [

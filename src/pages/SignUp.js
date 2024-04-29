@@ -4,7 +4,7 @@ import "../css/login.css";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; 
 
 
-export const SignUp = () => {
+export const SignUp = (props) => {
     const userRef = "users";
     
     const createFirebaseUser = async (f_name, l_name, addr, countr, cit, sta, z_code, h_phone, c_phone, email_addr) => {

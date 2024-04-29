@@ -50,7 +50,7 @@ async function addPetSurvey(ageRange, kids, livingConditions, activity, num_of_p
     }
     
 
-export const Survey = () => {
+export const Survey = (props) => {
     const questions = [
         {
             id: 'age',

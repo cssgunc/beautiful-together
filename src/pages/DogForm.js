@@ -3,7 +3,7 @@ import { db } from "../firebase-config.js";
 import { collection, doc, addDoc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 
-export const DogForm = () => {
+export const DogForm = (props) => {
 
     // TODO":
     

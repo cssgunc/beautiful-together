@@ -23,7 +23,7 @@ const max = new Pet('3', 'Max', 'Loyal and friendly', 'Dog', 'Golden Retriever',
 // let availablePets = [fido, spot, max];
 // let trackPets = availablePets;
 
-export const PetSelection = () => {
+export const PetSelection = (props) => {
     
     const[trackInfoClicked, setTrackInfoClicked] = useState(false);
     const[isTrackPetsNotEmpty, setIsTrackPetsNotEmpty] = useState(true);
