@@ -1,12 +1,42 @@
 import "../css/login.css";
-import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import React, { useState } from "react";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import React, { useState, useEffect } from "react";
+
+export const Logout = async () => {
+  const auth = getAuth();
+  try {
+    await signOut(auth);
+    console.log("Logged out successfully.");
+    localStorage.removeItem("userData");
+    window.location.href = "/login";
+  } catch (error) {
+    console.error("Logout is unsuccessful. Error:", error);
+  }
+};
 
 export const Login = () => {
   const auth = getAuth();
-  // define email and password fields bound to html input fields
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        localStorage.setItem("userData", JSON.stringify(user));
+        // Redirect to home page if the user is already logged in
+        window.location.href = "/home";
+      }
+    });
+
+    const storedUserData = localStorage.getItem("userData");
+    if (storedUserData) {
+      const userData = JSON.parse(storedUserData);
+      // Redirect to home page if the user is already logged in
+      window.location.href = "/home";
+    }
+
+    return unsubscribe;
+  }, [auth]);
 
   // define sign in method bound to html submit button
   const SignIn = (e) => {
@@ -14,25 +44,20 @@ export const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential);
-        // signed in
-        // TODO: Redirect to home page
+        // Signed in
+        // Redirect to home page
+        window.location.href = "/home";
       })
       .catch((error) => {
         console.log(error);
         console.log(typeof error);
-        // if Error (auth/user-not-found), user doesn't exist
+        // If Error (auth/user-not-found), user doesn't exist
+        if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password") {
+          alert("Invalid email or password. Please try again.");
+        } else {
+          alert(`Login failed. Error: ${error.message}`);
+        }
       });
-  };
-
-  const Logout = async (e) => {
-    e.preventDefault();
-    try {
-      await signOut(auth);
-      console.log('Logged out successfully.');
-      // TODO: Redirect to login page or update UI to reflect logged out state
-    } catch (error) {
-      console.error("Logout is unsuccessful. Error:", error);
-    }
   };
 
   return (

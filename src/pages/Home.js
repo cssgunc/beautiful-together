@@ -1,10 +1,13 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
+import Navbar from './components/NavBar'
 
 export default function Home() {
     const navigate = useNavigate();
 
     return (
+        <div>
+        <Navbar />
         <div className="flex flex-col items-center m-5 gap-5">
             <div classname="">
                 <img className="max-h-24" src="logo.png" alt="logo"/>
@@ -46,6 +49,7 @@ export default function Home() {
                     Dog Survey
                 </button>
             </div>
+        </div>
         </div>
     )
 }
