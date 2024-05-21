@@ -46,7 +46,7 @@ export const CatForm = () => {
 
             <form id="catform" className="flex p-8 justify-center m-3 bg-background w-5/6 min-w-min min-h-min rounded-md border- border-stone-200 border-8" onSubmit={handleCatForm}>
                 <div id="part1" className={page === 0 ? "": "hidden"}>
-                    <InputQuestion label="*First Name:" id="f_name" name="first_name" placeholder=" last name" required/>
+                    <InputQuestion label="*First Name:" id="f_name" name="first_name" placeholder=" first name" required/>
                     <InputQuestion label="*Last Name:" id="l_name" name="last_name" placeholder=" last name" required/>
                     <InputQuestion label="*Address:" id="address" name="address" placeholder="home address" pattern="^(?=\S*\s)(?=\P{L}*\p{L})(?=\D*\d)[\p{L}\d\s',.#/-]*$" autoComplete="street-address" required/>
                     <InputQuestion label="*Country:" id="country" name="country" placeholder=" country" autoComplete="country-name" required/>
