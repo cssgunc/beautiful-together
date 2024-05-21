@@ -1,8 +1,9 @@
 class Pet {
-    constructor(id, name, description, species, breed, gender, age, weight, color, personality, kidCompatible, dogCompatible, catCompatible, livestockCompatible, trained, image) {
+    constructor(id, name, description, species, breed, gender, age, weight, color, personality, kidCompatible, dogCompatible, catCompatible, livestockCompatible, trained, images) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.species = species;
         this.breed = breed;
         this.gender = gender;
         this.age = age;
@@ -14,7 +15,7 @@ class Pet {
         this.catCompatible = catCompatible;
         this.livestockCompatible = livestockCompatible;
         this.trained = trained;
-        this.image = image;
+        this.images = images;
     }
     
     save() {

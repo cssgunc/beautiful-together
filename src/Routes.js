@@ -4,20 +4,25 @@ import {Login} from './pages/Login'
 import {PetForm} from './pages/PetForm'
 import {CatForm} from './pages/CatForm'
 import {DogForm} from './pages/DogForm'
+import {SignUp} from './pages/SignUp'
 import {PetSelection} from './pages/PetSelection'
 import {PreLogin} from './pages/PreLogin'
+import Home from './pages/Home'
+import {Survey} from './pages/Survey'
 
 export const RoutesApp = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Login />} />
+                <Route path="/" element={<PreLogin />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/petform" element={<PetForm />} />
                 <Route path="/dogform" element={<DogForm />} />
                 <Route path="/catform" element={<CatForm />} />
                 <Route path="/petselection" element={<PetSelection />} />
-                <Route path= "/prelogin" element ={<PreLogin />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/survey" element={<Survey />} />
             </Routes>
         </Router>
     )
