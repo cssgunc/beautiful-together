@@ -142,36 +142,32 @@ export const PetSelection = () => {
     }
     
     return (
-        <div className='outsideDiv'>
-            <h1>Not Actually a Pet Selection Form</h1>
-
-            <div id="page1" className='normal'>
-                <img src={require('./img/placeholder_asha.jpeg')} alt="" height={200} width={200} />
-                <p>{page1Info}</p>
-
-                <div>
-                    <button id="page1left" onClick={() => swipe("left", "page1", "page2")} type="button">
-                        Swipe Left!
-                    </button>
-                    <button id="page1right" onClick={() => swipe("right", "page1", "page2")} type="button">
-                        Swipe Right!
-                    </button>
-                </div>
+        <div className="outsideDiv">
+          <div id="page1" className="normal">
+            <img src={require('./img/placeholder_asha.jpeg')} alt="" height={400} width={300} />
+            <p>{page1Info}</p>
+            <div>
+              <button id="page1left" onClick={() => swipe("left", "page1", "page2")} type="button">
+                <i className="fa fa-times" aria-hidden="true"></i>
+              </button>
+              <button id="page1right" onClick={() => swipe("right", "page1", "page2")} type="button">
+                <i className="fa fa-heart" aria-hidden="true"></i>
+              </button>
             </div>
-
-            <div id="page2" className={'normal background'}>
-                <img src={require('./img/placeholder_barry.jpg')} alt="" height={200} width={200}/>
-                <p>{page2Info}</p>
-
-                <div>
-                    <button id="page2left" onClick={() => swipe("left", "page2", "page1")} type="button">
-                        Swipe Left!
-                    </button>
-                    <button id="page2right" onClick={() => swipe("right", "page2", "page1")} type="button">
-                        Swipe Right!
-                    </button>
-                </div>
+          </div>
+    
+          <div id="page2" className={'normal background'}>
+            <img src={require('./img/placeholder_barry.jpg')} alt="" height={400} width={300} />
+            <p>{page2Info}</p>
+            <div>
+              <button id="page2left" onClick={() => swipe("left", "page2", "page1")} type="button">
+                <i className="fa fa-times" aria-hidden="true"></i>
+              </button>
+              <button id="page2right" onClick={() => swipe("right", "page2", "page1")} type="button">
+                <i className="fa fa-heart" aria-hidden="true"></i>
+              </button>
             </div>
+          </div>
         </div>
-    );
+      );
 }
