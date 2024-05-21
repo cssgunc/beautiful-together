@@ -1,187 +1,173 @@
-import Pet from '../Pet.js';
-import { useEffect, useState } from 'react';
-
-// icons from https://www.svgrepo.com/collection/phosphor-filled-icons/ under MIT liscence
-import cakeIcon from './icons/cake-fill-svgrepo-com.svg'
-import dogIcon from './icons/dog-fill-svgrepo-com.svg'
-import catIcon from './icons/cat-fill-svgrepo-com.svg'
-import maleIcon from './icons/gender-male-fill-svgrepo-com.svg'
-import femaleIcon from './icons/gender-female-fill-svgrepo-com.svg'
-import plusIcon from './icons/plus-circle-fill-svgrepo-com.svg'
-import minusIcon from './icons/minus-circle-fill-svgrepo-com.svg'
-import infoIcon from './icons/info-fill-svgrepo-com.svg'
-import clockIcon from './icons/clock-fill-svgrepo-com.svg'
-import { render } from '@testing-library/react';
-
-//Example Pets
-const fido = new Pet('1', 'Fido', 'Friendly and playful', 'Dog', 'Labrador', 'Male', 2, 30, 'Black', 'Active', false, true, false, false, true, ['https://wallpapershome.com/images/pages/pic_v/16641.jpg']);
-const spot = new Pet('2', 'Spot', 'Energetic and friendly', 'Dog', 'Dalmatian', 'Female', 3, 35, 'White with black spots', 'Energetic', true, true, true, false, true, ['https://cdn.britannica.com/47/236047-050-F06BFC5E/Dalmatian-dog.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Golden_Retriever_Dukedestiny01_drvd.jpg/640px-Golden_Retriever_Dukedestiny01_drvd.jpg', 'https://wallpapershome.com/images/pages/pic_v/16641.jpg']);
-const max = new Pet('3', 'Max', 'Loyal and friendly', 'Dog', 'Golden Retriever', 'Male', 1, 40, 'Golden', 'Calm', false, true, true, true, true, ['https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Golden_Retriever_Dukedestiny01_drvd.jpg/640px-Golden_Retriever_Dukedestiny01_drvd.jpg']);
-
-//const chosen = []
-
-// let availablePets = [fido, spot, max];
-// let trackPets = availablePets;
+import { useState } from 'react';
+import { db } from '../firebase-config.js';
+import { collection, getDocs, query } from 'firebase/firestore';
+import './PetSelection.css';
 
 export const PetSelection = () => {
-    
-    const[trackInfoClicked, setTrackInfoClicked] = useState(false);
-    const[isTrackPetsNotEmpty, setIsTrackPetsNotEmpty] = useState(true);
-    const[currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+    // TODO: Update frontend; Frontend is currently a mockup for ensuring functions work.
+    const catRef = "cats";
+    const dogRef = "dogs";
+    const catDetails = [
+        "id",
+        "Breed",
+        "Status",
+    ];
 
-    const[availablePets, setAvailablePets] = useState([fido, spot, max]);
-    const[petIndex, setPetIndex] = useState(availablePets.length - 1);
-    const[currentPet, setCurrentPet] = useState(availablePets[petIndex]);
+    const [pets, setPets] = useState([]);
+    const [prevCatIds, setPrevCatIds] = useState([]);
+    const [prevDogIds, setPrevDogIds] = useState([]);
+    const [petLength, setPetLength] = useState(0);
+    const [petIndex, setPetIndex] = useState(0);
 
-    const[chosenPets, setChosenPets] = useState([]);
-    const[rejectedPets, setRejectedPets] = useState([]);
+    const [page1Info, setPage1Info] = useState("loading");
+    const [page2Info, setPage2Info] = useState("loading");
+    const pageMap = {page1: setPage1Info, page2: setPage2Info};
 
+    const [petsLoaded, setPetsLoaded] = useState(false);
 
+    async function loadPets() {
+        // TODO: add pet form parameters to the catQuery
+        // Note: the 'in prevCatIds' parameter cannot be added to catQuery due to the array size limit of 30
+        /*
+        const catQuery = query(collection(db, catRef));
+        const catDocs = await getDocs(catQuery);
+        */
+        const catDocs = await getDocs(collection(db, catRef));
+        let cats = [];
+        let catIds = [];
 
-    function rejectionFunction() {
-        setRejectedPets(prevState => [...prevState, currentPet]);
-        if (petIndex - 1 >= 0) {
-            setCurrentPet(availablePets[petIndex-1]);
-        } else {
-            setIsTrackPetsNotEmpty(false);
-        }
-        setCurrentPhotoIndex(0);
-        setPetIndex(petIndex - 1);
-    }
+        catDocs.forEach((doc) => {
+            /** 
+            // To prevent showing a pet that has already been swiped on. 
+            if (doc.id not in prevCatIds) {
+                newCat = {};
+                // Assumes that the cat document contains every field listed in catDetails
+                for (const detail in catDetails) {
+                    newCat[detail] = doc.get(detail);
+                }
+                //...
+            }
+            */
+            cats = [...cats, { 
+                id: doc.id,
+                Breed: doc.get("Breed"), 
+                Status: doc.get("Status")
+            }];
+            catIds = [...catIds, doc.id];
+        });
 
-    function chosenFunction() {
-        setChosenPets(prevState => [...prevState, currentPet]);
-        if (petIndex - 1 >= 0) {
-            setCurrentPet(availablePets[petIndex-1]);
-        } else {
-            setIsTrackPetsNotEmpty(false);
-        }
-        setPetIndex(petIndex - 1);
-        setCurrentPhotoIndex(0);
-    }
-    
-    function renderDivs(index = 0) {
-        let bars = [];
-        let pets = currentPet.images.length;
-        for (let i = 0; i < pets; i++) {
-            bars.push(<div className={"flex-grow rounded mx-2 h-full p-1 bg-white" + (i === index ? " bg-opacity-100" : " bg-opacity-60") + " shadow-sm"}></div>);
-        }
-        return (bars)
-    }
+        setPets(cats);
+        setPrevCatIds([...prevCatIds, catIds]);
 
-    // For making the transition between the photos make sure to use the renderDivs function with the index you are changing to
-
-    function movePhotoLeft() {
-        if (currentPhotoIndex  > 0) {
-            setCurrentPhotoIndex(currentPhotoIndex - 1);
-        }
-    }
-
-    function movePhotoRight() {
-        if (currentPhotoIndex < currentPet.images.length - 1) {
-            setCurrentPhotoIndex(currentPhotoIndex + 1);
-        }
-    }
         
+        // TODO: add pet form parameters to the dogQuery
+        const dogQuery = query(collection(db, dogRef));
+        const dogDocs = await getDocs(dogQuery);
+        let dogs = [];
+        let dogIds = [];
+        //TODO: Add dogDocs once fields become more consistent.
+        //TODO: Determine how to mix cat and dog profiles when necessary (alternating? random?)
 
+        setPetLength(cats.length + dogs.length);
+        setPetIndex(cats.length + dogs.length - 1);
+        setPetsLoaded(true);
 
-    // replace the "true" with boolean expression for whether there are more dogs left
-    return isTrackPetsNotEmpty ? (
-        <main className="w-full h-screen bg-gradient-to-br from-backgroundGreen to-themeOrange bg-opacity-70 flex justify-center items-center shadow-inner"> {/* side-background for non-mobile users */}
-            <div className="h-full w-full max-h-fit max-w-[70vh] relative z-0 object-contain shadow-2xl shadow-backgroundGreen/80"> {/* pet image */}
-                    <img alt="pet_image" className="object-cover min-w-full min-h-full max-h-full shadow-inner z-10" src={currentPet.images[currentPhotoIndex]}></img>
+        if (cats.length + dogs.length === 0) {
+            var leftButton = document.getElementById("page1left");
+            var rightButton = document.getElementById("page1right");
+            leftButton.disabled = true;
+            rightButton.disabled = true;
+        }
+    }
+
+    function updatePetElement(id, index) {
+        setPetIndex(index - 1);
+        const setPage = pageMap[id];
+        if (index >= 0) {
+            const pet = pets[index];
+            let petInfo = "";
+            for (let i = 0; i < catDetails.length; i++) {
+                const field = catDetails[i];
+                petInfo += field + ": " + pet[field] + "\n";
+            }
+            setPage(petInfo);
+        } else {
+            setPage("No Pets Remaining");
+        }
+    }
+
+    if (!petsLoaded) {
+        loadPets();
+    } else if (page1Info === "loading") {
+        updatePetElement("page1", 0);
+        updatePetElement("page2", 1);
+    }
+
+    const swipe = (side, oldId, newId) => {
+        var oldElement = document.getElementById(oldId);
+        var newElement = document.getElementById(newId);
+        oldElement.classList.add("swipe" + side);
+        newElement.classList.remove("background");
+
+        // To ensure the first background page has disabled buttons; adding 'disabled' to the button's html makes it irremovable.
+        var newLeft = document.getElementById(newId + "left");
+        var newRight = document.getElementById(newId + "right");
+        newLeft.disabled = true;
+        newRight.disabled = true;
+
+        var oldLeft = document.getElementById(oldId + "left");
+        var oldRight = document.getElementById(oldId + "right");
+        oldLeft.disabled = true;
+        oldRight.disabled = true;
+
+        setTimeout(() => hide(oldId), 750);
+        setTimeout(() => updatePetElement(oldId, petIndex), 750)
+        if (petIndex >= -1) {
+            setTimeout(() => enableButtons(newId), 1500);
+        }
+    }
+
+    const hide = (id) => {
+        var element = document.getElementById(id);
+        element.classList.remove("swipeleft");
+        element.classList.remove("swiperight");
+        element.classList.add("background");
+    }
+
+    const enableButtons = (id) => {
+        var leftButton = document.getElementById(id + "left");
+        var rightButton = document.getElementById(id + "right");
+        leftButton.disabled = false;
+        rightButton.disabled = false;
+    }
     
-
-                <div className="absolute inset-0 h-full w-full max-w-[70vh] bg-transparent flex flex-col z-50 p-4"> {/* actual tinder slide, scaled to viewport height */}
-                    <div className="flex justify-between"> {/* bars at top */}
-                    {renderDivs(currentPhotoIndex)}
-                    </div>
-                    <div className="mt-auto p-4"> {/* brief pet name & stats */}
-                        <h1 className="text-white font-bold text-3xl">{currentPet.name}</h1>
-                    <div className='flex flex-row absolute inset-0 justify-between align-middle h-full w-full'>
-                        <button onClick={() => movePhotoLeft()} className="bg-transparent hover:bg-gradient-to-l from-transparent to-white/15 h-full w-12 z-20" type='button'></button>
-                        <button onClick={() => movePhotoRight()} className="bg-transparent hover:bg-gradient-to-r from-transparent to-white/15 h-full w-12 z-20" type='button'></button>
-                    </div>
-                    <p className="text-white">
-                        <img alt="pet_breed_icon" className="inline mr-2 w-6" src={currentPet.species === "Cat" ? catIcon : dogIcon}></img>
-                        <b>{currentPet.breed}</b></p>
-                    <p className="text-white">
-                        <img alt="pet_gender_icon" className="inline mr-2 w-6" src={currentPet.gender === "Male" ? maleIcon : femaleIcon}></img>
-                        <b>{currentPet.gender}</b></p>
-                    <p className="text-white">
-                        <img alt="pet_age_icon" className="inline mr-2 w-6" src={cakeIcon}></img>
-                        <b>{currentPet.age}</b></p>
-                </div>
-                <div className="flex justify-between p-4 pt-0"> {/* container for bottom-row buttons */}
-                    <button onClick={() => rejectionFunction()} type="button" className='z-50'>
-                        <img alt="xbutton" className="inline-block w-20 border-white" src={minusIcon}></img>
-                    </button>
-                    <button onClick={() => setTrackInfoClicked(!trackInfoClicked)} className='z-50'>
-                        <img alt="infobutton" className="inline-block w-10" src={infoIcon}></img>
-                    </button>
-                    <button onClick={() => chosenFunction()} type="button" className='z-50'>
-                        <img alt="heartbutton" className="inline-block w-20" src={plusIcon}></img>
-                    </button> 
-                </div>
-                </div>
+    return (
+        <div className="outsideDiv">
+          <div id="page1" className="normal">
+            <img src={require('./img/placeholder_asha.jpeg')} alt="" height={400} width={300} />
+            <p>{page1Info}</p>
+            <div>
+              <button id="page1left" onClick={() => swipe("left", "page1", "page2")} type="button">
+                <i className="fa fa-times" aria-hidden="true"></i>
+              </button>
+              <button id="page1right" onClick={() => swipe("right", "page1", "page2")} type="button">
+                <i className="fa fa-heart" aria-hidden="true"></i>
+              </button>
             </div>
-            {/* gray screen over for info screen (hidden initially, replace true with false to 
-                un-hide when info button clicked) */}
-            <div className={(!trackInfoClicked ? ("hidden") : ("")) + " absolute flex justify-center p-4 contentpcenter w-full h-full max-w-[70vh] min-h-max bg-gray-700 bg-opacity-40"}> {/* gray screen over for info screen (hidden initially, un-hide when info button clicked) */}
-                <div className="flex flex-col max-w-[60vh] max-h-9/10 w-full bg-white p-4 rounded-xl shadow-xl"> {/* info screen */}
-                    <div className="flex justify-between flex-row min-w-full">
-                        <div>
-                            <t className="flex text-themeOrange font-bold text-3xl">Pet Info</t>
-                        </div>
-                        <div>
-                            <button onClick={() => setTrackInfoClicked(!trackInfoClicked)} className="flex text-black text-3xl">X</button>
-                        </div>
-                    </div>
-                    <p className='flex-grow'>
-                        {currentPet.description}
-                    </p>
-                    <p className="flex-grow">
-                        <img alt="pet_breed_icon" className="inline mr-2 w-6" src={currentPet.species === "Cat" ? catIcon : dogIcon}></img>
-                    {currentPet.breed}
-                    </p>
-                    <p className="flex-grow">
-                        <img alt="pet_gender_icon" className="inline mr-2 w-6" src={currentPet.gender === "Male" ? maleIcon : femaleIcon}></img>
-                        {currentPet.gender}
-                        </p>
-                    <p className="flex-grow">
-                        <img alt="pet_age_icon" className="inline mr-2 w-6" src={cakeIcon}></img>
-                        {currentPet.age}
-                        </p>
-                    <p className='flex-grow'>
-                        {currentPet.personality}
-                    </p>
-                    <p className='flex-grow'>
-                        {currentPet.kidCompatible ? 'Kid Compatible' : 'Not Kid Compatible'}
-                    </p>
-                    <p className='flex-grow'>
-                        {currentPet.dogCompatible ? 'Dog Compatible' : 'Not Dog Compatible'}
-                    </p>
-                    <p className='flex-grow'>
-                        {currentPet.catCompatible ? 'Cat Compatible' : 'Not Cat Compatible'}
-                    </p>
-                    <p className='flex-grow'>
-                        {currentPet.livestockCompatible ? 'Livestock Compatible' : 'Not Livestock Compatible'}
-                    </p>
-                    <p className='flex-grow'>
-                        {currentPet.trained ? 'Trained' : 'Not Formally Trained'}
-                    </p>
-                </div>
-            </div>
-        </main>
-
-    )
-    : (
-        <main className="flex flex-col justify-center items-center w-full h-screen min-w-full min-h-full bg-themeOrange">
-            <img alt="broken_heart" className="w-40" src={clockIcon}></img> {/* heartbreak pic */}
-            <p className="text-center font-bold w-[50vh] text-white">
-                We've run out of pets to show at the moment. Please check back in later.
-            </p> {/* out of pets text */}
-        </main>
-    );
+          </div>
     
+          <div id="page2" className={'normal background'}>
+            <img src={require('./img/placeholder_barry.jpg')} alt="" height={400} width={300} />
+            <p>{page2Info}</p>
+            <div>
+              <button id="page2left" onClick={() => swipe("left", "page2", "page1")} type="button">
+                <i className="fa fa-times" aria-hidden="true"></i>
+              </button>
+              <button id="page2right" onClick={() => swipe("right", "page2", "page1")} type="button">
+                <i className="fa fa-heart" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      );
 }
