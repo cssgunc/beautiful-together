@@ -10,14 +10,16 @@ module.exports = {
           300: '#3fa822',
           500: '#23600f',
         },
-        
         orange: {
           200: '#ef9e41',
           400: '#f68020',
         },
-      },
+        passiveGreen: '#40a824',
+        backgroundGreen: '#587d39',
+        themeOrange: '#f5a336',
+        background: '#f0f0f0',
+      }
     },
   },
   plugins: [],
 }
-
