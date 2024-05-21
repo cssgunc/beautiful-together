@@ -7,7 +7,6 @@ import {DogForm} from './pages/DogForm'
 import {SignUp} from './pages/SignUp'
 import {PetSelection} from './pages/PetSelection'
 import {PreLogin} from './pages/PreLogin'
-import Home from './pages/Home'
 import {Survey} from './pages/Survey'
 
 export const RoutesApp = () => {

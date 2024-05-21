@@ -24,7 +24,7 @@ export const PreLogin = () => {
             </div>
             <div className="flex flex-col text-lg gap-3 w-full items-center">
                 <div className="text-xl, font-bold">Are you a...</div>
-                <button onClick={() => navigate('/')} className="flex flex-row align-center justify-center gap-2 bg-green-300 text-white rounded p-3 font-bold shadow-md w-full">
+                <button onClick={() => navigate('/login')} className="flex flex-row align-center justify-center gap-2 bg-green-300 text-white rounded p-3 font-bold shadow-md w-full">
                     Existing User
                     <svg width="30" height="27" viewBox="0 0 30 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9.5 19V16.8889H16.8889V2.11111H9.5V0H16.8889C17.4694 0 17.9666 0.206889 18.3804 0.620667C18.7942 1.03444 19.0007 1.53126 19 2.11111V16.8889C19 17.4694 18.7935 17.9666 18.3804 18.3804C17.9673 18.7942 17.4701 19.0007 16.8889 19H9.5ZM7.38889 14.7778L5.9375 13.2472L8.62917 10.5556H0V8.44444H8.62917L5.9375 5.75278L7.38889 4.22222L12.6667 9.5L7.38889 14.7778Z" fill="white"/>
