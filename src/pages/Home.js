@@ -2,7 +2,7 @@ import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import Navbar from './components/NavBar'
 
-export default function Home() {
+export const Home = () => {
     const navigate = useNavigate();
 
     return (
