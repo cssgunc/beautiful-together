@@ -53,6 +53,28 @@
     .normal button:hover {
       color: #e71f63;
     }
+
+    .divButton {
+      display: inline;
+      background-color: transparent;
+      border: none;
+      font-size: 24px;
+      color: #fe3c72;
+      padding: 10px;
+      margin: 0 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .divButton:hover {
+      color: #e71f63;
+    }
+
+    .divButton.disabled {
+      color: #ccc;
+      cursor: not-allowed;
+      pointer-events: none; /* Disable all pointer events */
+    }
   
     .normal.background {
       opacity: 0;

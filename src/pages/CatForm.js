@@ -1,10 +1,11 @@
-"use client";
+import { useNavigate } from "react-router-dom";
 import { db } from "../firebase-config.js";
 import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react"; 
 
 export const CatForm = () => {
     const [page, setPage] = useState(0);
+    const navigate = useNavigate(); // Initialize useNavigate hook for navigation
 
     const preferenceList = [
         "cat_age",
@@ -41,6 +42,9 @@ export const CatForm = () => {
             // Update the cat preferences for the specific user using the user UID
             await setDoc(doc(db, userRef, userUID), newCatInfo, { merge: true });
             console.log("Cat preferences updated for user:", userUID);
+
+            // Redirect to "/petselection" after successful form submission
+            navigate("/petselection");
         } catch (error) {
             console.error("Error updating cat preferences:", error);
         }
@@ -98,26 +102,26 @@ export const CatForm = () => {
 }
 
 function ListQuestion({label, name, id, selectText, questions, allowMultiple = false, ...args}) {
-    return(
-    <div className="flex flex-col pt-2 pb-4 px-3 min-h-min w-full align-top bg-themeOrange rounded-md border-white border m-2 space-y-2">
-        <label className="font-sans text-wrap text-white">{label}</label>
-        <div className="border-2 p-2 rounded-lg border-white space-y-2">
-            {questions.map((question) => (
-                <fieldset id={id} className="space-x-2" key={question.id}>
-                    <input
-                        className=""
-                        type={allowMultiple ? "checkbox" : "radio"}
-                        id={`${id}-${question.id}`}
-                        name={allowMultiple ? `${name}[]` : name}
-                        value={question.value}
-                        {...args}
-                    />
-                    <label className="font-sans text-white text-wrap" htmlFor={`${id}-${question.id}`}>
-                        {question.name}
-                    </label>
-                </fieldset>
-            ))}
+    return (
+        <div className="flex flex-col pt-2 pb-4 px-3 min-h-min w-full align-top bg-themeOrange rounded-md border-white border m-2 space-y-2">
+            <label className="font-sans text-wrap text-white">{label}</label>
+            <div className="border-2 p-2 rounded-lg border-white space-y-2">
+                {questions.map((question) => (
+                    <fieldset id={id} className="space-x-2" key={question.id}>
+                        <input
+                            className=""
+                            type={allowMultiple ? "checkbox" : "radio"}
+                            id={`${id}-${question.id}`}
+                            name={allowMultiple ? `${name}[]` : name}
+                            value={question.value}
+                            {...args}
+                        />
+                        <label className="font-sans text-white text-wrap" htmlFor={`${id}-${question.id}`}>
+                            {question.name}
+                        </label>
+                    </fieldset>
+                ))}
+            </div>
         </div>
-    </div>
     );
 }

@@ -112,7 +112,7 @@ export const PetSelection = () => {
             setPage(petInfo);
 
             const imageId = pet.ImageUrl.split('/').pop();
-            const directImageUrl = `https://i.imgur.com/${imageId}.jpg`;
+            const directImageUrl = `https://i.imgur.com/${imageId}.jpg`;            
             setImageUrl(directImageUrl);
         } else {
             setPage("No Pets Remaining");
@@ -160,6 +160,7 @@ export const PetSelection = () => {
     };
 
     const swipe = (side, oldId, newId) => {
+        console.log("Swiped");
         const userUID = JSON.parse(localStorage.getItem("userData")).uid;
         removeSelectedPetFromUser(pets[petIndex].id, userUID);
 
@@ -230,12 +231,12 @@ export const PetSelection = () => {
                 <img src={page1ImageUrl} alt="" height={400} width={300} />
                 <p>{page1Info}</p>
                 <div>
-                    <button id="page1left" onClick={() => swipe("left", "page1", "page2")} type="button">
+                    <div type="button" className='divButton' style={{ cursor: 'pointer', padding: '10px', color: '#fe3c72', fontSize: '24px' }} id="page1left" onClick={() => swipe("left", "page1", "page2")}>
                         <i className="fa fa-times" aria-hidden="true"></i>
-                    </button>
-                    <button id="page1right" onClick={() => swipeHeart("right", "page1", "page2")} type="button">
+                    </div>
+                    <div type="button" className='divButton' style={{ cursor: 'pointer', padding: '10px', color: '#fe3c72', fontSize: '24px' }} id="page1right" onClick={() => swipeHeart("right", "page1", "page2")}>
                         <i className="fa fa-heart" aria-hidden="true"></i>
-                    </button>
+                    </div>
                 </div>
             </div>
 
@@ -254,12 +255,12 @@ export const PetSelection = () => {
                 <img src={page2ImageUrl} alt="" height={400} width={300} />
                 <p>{page2Info}</p>
                 <div>
-                    <button id="page2left" onClick={() => swipe("left", "page2", "page1")} type="button">
+                    <div type="button" className='divButton' style={{ cursor: 'pointer', padding: '10px', color: '#fe3c72', fontSize: '24px' }} id="page2left" onClick={() => swipe("left", "page2", "page1")}>
                         <i className="fa fa-times" aria-hidden="true"></i>
-                    </button>
-                    <button id="page2right" onClick={() => swipeHeart("right", "page2", "page1")} type="button">
+                    </div>
+                    <div type="button" className='divButton' style={{ cursor: 'pointer', padding: '10px', color: '#fe3c72', fontSize: '24px' }} id="page2right" onClick={() => swipeHeart("right", "page2", "page1")}>
                         <i className="fa fa-heart" aria-hidden="true"></i>
-                    </button>
+                    </div>
                 </div>
             </div>
         </div>
