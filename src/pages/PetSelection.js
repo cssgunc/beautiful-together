@@ -1,89 +1,108 @@
-import { useState } from 'react';
+// No Pets Remaining Code is unnecessary technically, but left in here in case of future development
+
+import { useState, useEffect } from 'react';
 import { db } from '../firebase-config.js';
-import { collection, getDocs, query } from 'firebase/firestore';
+import { collection, getDocs, query, getDoc, doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
+import {useNavigate} from 'react-router-dom';
 import './PetSelection.css';
 
 export const PetSelection = () => {
-    // TODO: Update frontend; Frontend is currently a mockup for ensuring functions work.
+    const navigate = useNavigate();
     const catRef = "cats";
-    const dogRef = "dogs";
-    const catDetails = [
-        "id",
-        "Breed",
-        "Status",
-    ];
+    const catDetails = ["Age", "Breed", "Status"];
 
     const [pets, setPets] = useState([]);
-    const [prevCatIds, setPrevCatIds] = useState([]);
-    const [prevDogIds, setPrevDogIds] = useState([]);
-    const [petLength, setPetLength] = useState(0);
     const [petIndex, setPetIndex] = useState(0);
 
     const [page1Info, setPage1Info] = useState("loading");
     const [page2Info, setPage2Info] = useState("loading");
-    const pageMap = {page1: setPage1Info, page2: setPage2Info};
+    const [page1ImageUrl, setPage1ImageUrl] = useState("");
+    const [page2ImageUrl, setPage2ImageUrl] = useState("");
+    const pageMap = { page1: setPage1Info, page2: setPage2Info };
+    const imageUrlMap = { page1: setPage1ImageUrl, page2: setPage2ImageUrl };
 
-    const [petsLoaded, setPetsLoaded] = useState(false);
+    useEffect(() => {
+        async function fetchPets() {
+            const userUID = JSON.parse(localStorage.getItem("userData")).uid;
+            const userRef = doc(db, "users", userUID);
+            const userDoc = await getDoc(userRef);
+            let cats = [];
 
-    async function loadPets() {
-        // TODO: add pet form parameters to the catQuery
-        // Note: the 'in prevCatIds' parameter cannot be added to catQuery due to the array size limit of 30
-        /*
-        const catQuery = query(collection(db, catRef));
-        const catDocs = await getDocs(catQuery);
-        */
-        const catDocs = await getDocs(collection(db, catRef));
-        let cats = [];
-        let catIds = [];
+            if (userDoc.exists()) {
+                const userPreferences = userDoc.data();
+                const ageFilter = userPreferences.cat_age;
+                const furFilter = userPreferences.cat_fur_length;
+                const litterboxFilter = userPreferences.cat_litterbox;
+                const traitsFilter = userPreferences.cat_traits;
 
-        catDocs.forEach((doc) => {
-            /** 
-            // To prevent showing a pet that has already been swiped on. 
-            if (doc.id not in prevCatIds) {
-                newCat = {};
-                // Assumes that the cat document contains every field listed in catDetails
-                for (const detail in catDetails) {
-                    newCat[detail] = doc.get(detail);
+                const catQuery = query(collection(db, catRef));
+                const catDocs = await getDocs(catQuery);
+
+                catDocs.forEach((doc) => {
+                    const cat = {
+                        id: doc.id,
+                        Age: doc.get("Age"),
+                        Breed: doc.get("Breed"),
+                        Status: doc.get("Status"),
+                        Trained: doc.get("Trained"),
+                        ImageUrl: doc.get("imageURL"),
+                        EnergyLevel: doc.get("Energy Level")
+                    };
+
+                    const isMatch = (
+                        (!ageFilter || cat.Age === ageFilter) &&
+                        (!furFilter || cat.Breed.toLowerCase().replace(/[\s-]/g, '').includes(furFilter.toLowerCase().replace(/[\s-]/g, ''))) &&
+                        (!litterboxFilter || (litterboxFilter === "Yes" ? cat.Trained === "I'm Litterbox Trained" : true)) &&
+                        (!traitsFilter || traitsFilter.some(trait => cat.EnergyLevel.includes(trait)))
+                    );
+
+                    if (isMatch) {
+                        cats.push(cat);
+                    }
+                });
+
+                setPets(cats);
+                if (cats.length === 0) {
+                    displayNoPets();
+                } else if (cats.length === 1) {
+                    updatePetElement("page1", 0);
+                    setPage2Info("");
+                    setPage2ImageUrl("");
+                    disableButtons("page2");
+                } else {
+                    updatePetElement("page1", 0);
+                    updatePetElement("page2", 1);
+                    enableButtons("page1");
+                    enableButtons("page2");
                 }
-                //...
+            } else {
+                console.log("User document not found");
             }
-            */
-            cats = [...cats, { 
-                id: doc.id,
-                Breed: doc.get("Breed"), 
-                Status: doc.get("Status")
-            }];
-            catIds = [...catIds, doc.id];
-        });
-
-        setPets(cats);
-        setPrevCatIds([...prevCatIds, catIds]);
-
-        
-        // TODO: add pet form parameters to the dogQuery
-        const dogQuery = query(collection(db, dogRef));
-        const dogDocs = await getDocs(dogQuery);
-        let dogs = [];
-        let dogIds = [];
-        //TODO: Add dogDocs once fields become more consistent.
-        //TODO: Determine how to mix cat and dog profiles when necessary (alternating? random?)
-
-        setPetLength(cats.length + dogs.length);
-        setPetIndex(cats.length + dogs.length - 1);
-        setPetsLoaded(true);
-
-        if (cats.length + dogs.length === 0) {
-            var leftButton = document.getElementById("page1left");
-            var rightButton = document.getElementById("page1right");
-            leftButton.disabled = true;
-            rightButton.disabled = true;
         }
+
+        fetchPets();
+    }, []);
+
+    useEffect(() => {
+        if (pets.length > 0) {
+            updatePetElement("page1", 0);
+            updatePetElement("page2", 1);
+        }
+    }, [pets]);
+
+    function displayNoPets() {
+        setPage1Info("No Pets Remaining");
+        setPage2Info("No Pets Remaining");
+        setPage1ImageUrl("https://t3.ftcdn.net/jpg/01/12/43/90/360_F_112439022_Sft6cXK9GLnzWjjIkVMj2Lt34RcKUpxm.jpg");
+        setPage2ImageUrl("https://t3.ftcdn.net/jpg/01/12/43/90/360_F_112439022_Sft6cXK9GLnzWjjIkVMj2Lt34RcKUpxm.jpg");
+        disableButtons("page1");
+        disableButtons("page2");
     }
 
     function updatePetElement(id, index) {
-        setPetIndex(index - 1);
         const setPage = pageMap[id];
-        if (index >= 0) {
+        const setImageUrl = imageUrlMap[id];
+        if (index >= 0 && index < pets.length) {
             const pet = pets[index];
             let petInfo = "";
             for (let i = 0; i < catDetails.length; i++) {
@@ -91,83 +110,158 @@ export const PetSelection = () => {
                 petInfo += field + ": " + pet[field] + "\n";
             }
             setPage(petInfo);
+
+            const imageId = pet.ImageUrl.split('/').pop();
+            const directImageUrl = `https://i.imgur.com/${imageId}.jpg`;
+            setImageUrl(directImageUrl);
         } else {
             setPage("No Pets Remaining");
+            setImageUrl("https://t3.ftcdn.net/jpg/01/12/43/90/360_F_112439022_Sft6cXK9GLnzWjjIkVMj2Lt34RcKUpxm.jpg");
+            disableButtons(id);
         }
     }
 
-    if (!petsLoaded) {
-        loadPets();
-    } else if (page1Info === "loading") {
-        updatePetElement("page1", 0);
-        updatePetElement("page2", 1);
+    function disableButtons(id) {
+        const leftButton = document.getElementById(id + "left");
+        const rightButton = document.getElementById(id + "right");
+        leftButton.disabled = true;
+        rightButton.disabled = true;
     }
 
+    function enableButtons(id) {
+        const leftButton = document.getElementById(id + "left");
+        const rightButton = document.getElementById(id + "right");
+        leftButton.disabled = false;
+        rightButton.disabled = false;
+    }
+
+    const addSelectedPetToUser = async (petId, userUID) => {
+      try {
+        const userRef = doc(db, "users", userUID);
+        await updateDoc(userRef, {
+          selected_cats: arrayUnion(petId)
+        });
+        console.log("Pet ID added to user's selected_pets array");
+      } catch (error) {
+        console.error("Error adding pet ID to user's selected_pets array:", error);
+      }
+    };
+
+    const removeSelectedPetFromUser = async (petId, userUID) => {
+      try {
+        const userRef = doc(db, "users", userUID);
+        await updateDoc(userRef, {
+          selected_cats: arrayRemove(petId)
+        });
+        console.log("Pet ID removed from user's selected_pets array");
+      } catch (error) {
+        console.error("Error removing pet ID from user's selected_pets array:", error);
+      }
+    };
+
     const swipe = (side, oldId, newId) => {
-        var oldElement = document.getElementById(oldId);
-        var newElement = document.getElementById(newId);
+        const userUID = JSON.parse(localStorage.getItem("userData")).uid;
+        removeSelectedPetFromUser(pets[petIndex].id, userUID);
+
+        const oldElement = document.getElementById(oldId);
+        const newElement = document.getElementById(newId);
         oldElement.classList.add("swipe" + side);
         newElement.classList.remove("background");
 
-        // To ensure the first background page has disabled buttons; adding 'disabled' to the button's html makes it irremovable.
-        var newLeft = document.getElementById(newId + "left");
-        var newRight = document.getElementById(newId + "right");
-        newLeft.disabled = true;
-        newRight.disabled = true;
-
-        var oldLeft = document.getElementById(oldId + "left");
-        var oldRight = document.getElementById(oldId + "right");
-        oldLeft.disabled = true;
-        oldRight.disabled = true;
+        disableButtons(newId);
+        disableButtons(oldId);
 
         setTimeout(() => hide(oldId), 750);
-        setTimeout(() => updatePetElement(oldId, petIndex), 750)
+        setTimeout(() => {
+            const nextIndex = (petIndex + 1) % pets.length;
+            setPetIndex(nextIndex);
+            updatePetElement(oldId, nextIndex);
+        }, 750);
         if (petIndex >= -1) {
             setTimeout(() => enableButtons(newId), 1500);
         }
     }
 
+    const swipeHeart = (side, oldId, newId) => {
+    console.log("Hearted");
+      const userUID = JSON.parse(localStorage.getItem("userData")).uid;
+      addSelectedPetToUser(pets[petIndex].id, userUID);
+      
+      const oldElement = document.getElementById(oldId);
+      const newElement = document.getElementById(newId);
+      oldElement.classList.add("swipe" + side);
+      newElement.classList.remove("background");
+
+      disableButtons(newId);
+      disableButtons(oldId);
+
+      setTimeout(() => hide(oldId), 750);
+      setTimeout(() => {
+          const nextIndex = (petIndex + 1) % pets.length;
+          setPetIndex(nextIndex);
+          updatePetElement(oldId, nextIndex);
+      }, 750);
+      if (petIndex >= -1) {
+          setTimeout(() => enableButtons(newId), 1500);
+      }
+  }
+
     const hide = (id) => {
-        var element = document.getElementById(id);
+        const element = document.getElementById(id);
         element.classList.remove("swipeleft");
         element.classList.remove("swiperight");
         element.classList.add("background");
     }
 
-    const enableButtons = (id) => {
-        var leftButton = document.getElementById(id + "left");
-        var rightButton = document.getElementById(id + "right");
-        leftButton.disabled = false;
-        rightButton.disabled = false;
-    }
-    
     return (
         <div className="outsideDiv">
-          <div id="page1" className="normal">
-            <img src={require('./img/placeholder_asha.jpeg')} alt="" height={400} width={300} />
-            <p>{page1Info}</p>
-            <div>
-              <button id="page1left" onClick={() => swipe("left", "page1", "page2")} type="button">
-                <i className="fa fa-times" aria-hidden="true"></i>
-              </button>
-              <button id="page1right" onClick={() => swipe("right", "page1", "page2")} type="button">
-                <i className="fa fa-heart" aria-hidden="true"></i>
-              </button>
+            <div id="page1" className="normal">
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <svg
+        onClick={() => navigate('/checkout')}
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 576 512"
+        width="30"
+        height="30"
+      >
+        <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/>
+      </svg>
+    </div>
+                <img src={page1ImageUrl} alt="" height={400} width={300} />
+                <p>{page1Info}</p>
+                <div>
+                    <button id="page1left" onClick={() => swipe("left", "page1", "page2")} type="button">
+                        <i className="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                    <button id="page1right" onClick={() => swipeHeart("right", "page1", "page2")} type="button">
+                        <i className="fa fa-heart" aria-hidden="true"></i>
+                    </button>
+                </div>
             </div>
-          </div>
-    
-          <div id="page2" className={'normal background'}>
-            <img src={require('./img/placeholder_barry.jpg')} alt="" height={400} width={300} />
-            <p>{page2Info}</p>
-            <div>
-              <button id="page2left" onClick={() => swipe("left", "page2", "page1")} type="button">
-                <i className="fa fa-times" aria-hidden="true"></i>
-              </button>
-              <button id="page2right" onClick={() => swipe("right", "page2", "page1")} type="button">
-                <i className="fa fa-heart" aria-hidden="true"></i>
-              </button>
+
+            <div id="page2" className={'normal background'}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <svg
+        onClick={() => navigate('/checkout')}
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 576 512"
+        width="30"
+        height="30"
+      >
+        <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/>
+      </svg>
+    </div>
+                <img src={page2ImageUrl} alt="" height={400} width={300} />
+                <p>{page2Info}</p>
+                <div>
+                    <button id="page2left" onClick={() => swipe("left", "page2", "page1")} type="button">
+                        <i className="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                    <button id="page2right" onClick={() => swipeHeart("right", "page2", "page1")} type="button">
+                        <i className="fa fa-heart" aria-hidden="true"></i>
+                    </button>
+                </div>
             </div>
-          </div>
         </div>
-      );
+    );
 }

@@ -8,6 +8,7 @@ import {SignUp} from './pages/SignUp'
 import {PetSelection} from './pages/PetSelection'
 import {PreLogin} from './pages/PreLogin'
 import {Survey} from './pages/Survey'
+import {Checkout} from './pages/Checkout'
 
 export const RoutesApp = () => {
     return (
@@ -22,6 +23,7 @@ export const RoutesApp = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/survey" element={<Survey />} />
+                <Route path='/checkout' element={<Checkout />}></Route>
             </Routes>
         </Router>
     )

@@ -1,13 +1,12 @@
 import { db } from "../firebase-config.js";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, doc, setDoc } from "firebase/firestore";
 import "../css/login.css";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; 
-
 
 export const SignUp = () => {
     const userRef = "users";
     
-    const createFirebaseUser = async (f_name, l_name, addr, countr, cit, sta, z_code, h_phone, c_phone, email_addr) => {
+    const createFirebaseUser = async (userId, f_name, l_name, addr, countr, cit, sta, z_code, h_phone, c_phone, email_addr) => {
         const newUser = {
             first_name: f_name, 
             last_name: l_name, 
@@ -20,8 +19,7 @@ export const SignUp = () => {
             cell_phone: c_phone, 
             email: email_addr
         };
-        const newUserRef = await addDoc(collection(db, userRef), newUser);
-        return newUserRef.id;
+        await setDoc(doc(db, userRef, userId), newUser);
     };
 
     const auth = getAuth(); 
@@ -44,10 +42,9 @@ export const SignUp = () => {
             // Use Firebase to create a new user
             console.log("test");
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            //const user = userCredential.user;
+            const user = userCredential.user;
 
             const newUser = {
-                
                 f_name: e.target.elements.f_name.value, 
                 l_name: e.target.elements.l_name.value, 
                 addr: e.target.elements.addr.value, 
@@ -60,11 +57,10 @@ export const SignUp = () => {
                 email_addr: email
             };
 
-            // Store additional user information in Firestore
-            const tempUser = await createFirebaseUser(newUser.f_name, newUser.l_name, newUser.addr, newUser.countr, newUser.cit, newUser.sta, newUser.z_code, newUser.h_phone, newUser.c_phone, newUser.email_addr);
+            // Store additional user information in Firestore with the user UID as the document ID
+            await createFirebaseUser(user.uid, newUser.f_name, newUser.l_name, newUser.addr, newUser.countr, newUser.cit, newUser.sta, newUser.z_code, newUser.h_phone, newUser.c_phone, newUser.email_addr);
 
-
-            sessionStorage.setItem('userUID', tempUser);
+            sessionStorage.setItem('userUID', user.uid);
 
             alert("User created successfully!");
         } catch (error) {

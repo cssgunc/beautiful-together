@@ -1,4 +1,3 @@
-@media screen and (max-width: 950px) {
     .outsideDiv {
       position: relative;
       display: flex;
@@ -72,4 +71,3 @@
       transform-origin: bottom right;
       opacity: 0;
     }
-  }
